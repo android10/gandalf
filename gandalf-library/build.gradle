@@ -1,5 +1,14 @@
 apply plugin: 'java'
 
-dependencies {
+repositories {
+  mavenCentral()
+}
 
+dependencies {
+  // regular dependencies
+  compile 'com.google.android:android:4.1.1.4'
+
+  //test dependencies
+  testCompile 'junit:junit:4.11'
+  testCompile 'org.mockito:mockito-all:1.9.5'
 }

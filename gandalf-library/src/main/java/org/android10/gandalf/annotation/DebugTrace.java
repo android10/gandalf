@@ -13,7 +13,7 @@ import static java.lang.annotation.ElementType.METHOD;
 
 /**
  * Indicates that the annotated method is being traced (debug mode only) and
- * will use Android Log to print debug data:
+ * will use {@link android.util.Log} to print debug data:
  * - Method name
  * - Method parameters
  * - Total execution time
