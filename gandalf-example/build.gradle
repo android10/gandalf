@@ -11,6 +11,18 @@ android {
     versionCode 1
     versionName "1.0"
   }
+
+  packagingOptions {
+    exclude 'META-INF/ASL2.0'
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/LICENSE'
+  }
+
+  lintOptions {
+    abortOnError false
+    disable 'InvalidPackage' // Some libraries have issues with this
+  }
+
   buildTypes {
     release {
       runProguard false
@@ -20,4 +32,5 @@ android {
 }
 
 dependencies {
+  compile project(':gandalf-library')
 }
