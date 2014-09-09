@@ -4,8 +4,5 @@
  */
 package org.android10.gandalf.weaving;
 
-/**
- *
- */
 public class CodeInjector {
 }

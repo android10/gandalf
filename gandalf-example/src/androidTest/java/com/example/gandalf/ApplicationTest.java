@@ -1,4 +1,4 @@
-package gandalf.example.com.gandalf;
+package com.example.gandalf;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -18,6 +18,6 @@ import static java.lang.annotation.ElementType.METHOD;
  * - Method parameters
  * - Total execution time
  */
-@Retention(RetentionPolicy.SOURCE)
-@Target({CONSTRUCTOR, METHOD})
+@Retention(RetentionPolicy.CLASS)
+@Target({ CONSTRUCTOR, METHOD })
 public @interface DebugTrace {}

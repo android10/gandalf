@@ -5,7 +5,7 @@ android {
   buildToolsVersion "19.1.0"
 
   defaultConfig {
-    applicationId "gandalf.example.com.gandalf"
+    applicationId "com.example.gandalf"
     minSdkVersion 15
     targetSdkVersion 20
     versionCode 1
@@ -16,6 +16,7 @@ android {
     exclude 'META-INF/ASL2.0'
     exclude 'META-INF/NOTICE'
     exclude 'META-INF/LICENSE'
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
   }
 
   lintOptions {
