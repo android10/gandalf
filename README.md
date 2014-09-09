@@ -1,4 +1,4 @@
-Gandalf
+Gandalf [![Build Status](https://travis-ci.org/android10/gandalf.svg)](https://travis-ci.org/android10/gandalf)
 =========================
 
 work in progress
