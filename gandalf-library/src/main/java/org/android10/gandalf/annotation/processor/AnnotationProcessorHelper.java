@@ -6,7 +6,7 @@ package org.android10.gandalf.annotation.processor;
 
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import javax.lang.model.SourceVersion;
@@ -23,7 +23,7 @@ public class AnnotationProcessorHelper {
   }
 
   protected Set<String> getSupportedAnnotations() {
-    Set<String> supportedTypes = new HashSet<String>();
+    Set<String> supportedTypes = new LinkedHashSet<String>();
     for (Class<? extends Annotation> annotationType : SUPPORTED_ANNOTATIONS) {
       supportedTypes.add(annotationType.getCanonicalName());
     }
