@@ -9,7 +9,6 @@ import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.RoundEnvironment;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
-import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
@@ -38,23 +37,16 @@ public class GandalfAnnotationProcessor extends AbstractProcessor {
     for (Element element : roundEnvironment.getElementsAnnotatedWith(DebugTrace.class)) {
       if (isValidElement(element)) {
         String methodName = element.getSimpleName().toString();
-
-        try {
-          String message = "Debug trace annotation found!!!" + methodName + " in class : "
-              + element.getKind().name();
-
-          ElementKind.METHOD.name();
-
-          processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, message);
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
+        String message = "Debug trace annotation found!!!" + "in " + methodName + " of type "
+            + element.getKind().name();
+        this.printMessage(message);
       } else {
-        //throw exception?
+        throw new RuntimeException("Unsupported modifier for element of type: "
+            + element.getKind().name()
+            + " in "
+            + element.getSimpleName().toString());
       }
-
     }
-
     return true;
   }
 
@@ -68,5 +60,9 @@ public class GandalfAnnotationProcessor extends AbstractProcessor {
     }
 
     return isValid;
+  }
+
+  private void printMessage(String message) {
+    processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, message);
   }
 }

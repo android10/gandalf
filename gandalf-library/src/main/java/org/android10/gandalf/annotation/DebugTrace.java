@@ -18,7 +18,7 @@ import static java.lang.annotation.ElementType.METHOD;
  * - Method arguments.
  * - Total execution time.
  */
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 @Target({ CONSTRUCTOR, METHOD })
 public @interface DebugTrace {
   LoggingLevel value() default LoggingLevel.EVERYTHING;
