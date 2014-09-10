@@ -6,7 +6,7 @@ package org.android10.gandalf;
 
 public class Gandalf {
 
-  public static boolean DEBUG = true;
+  public static boolean debug = true;
 
   private Gandalf() {}
 }
