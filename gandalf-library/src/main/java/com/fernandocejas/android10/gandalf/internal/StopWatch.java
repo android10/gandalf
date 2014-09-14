@@ -2,7 +2,7 @@
  * Copyright (C) 2014 android10.org. All rights reserved.
  * @author Fernando Cejas (the android10 coder)
  */
-package org.android10.gandalf.internal;
+package com.fernandocejas.android10.gandalf.internal;
 
 import java.util.concurrent.TimeUnit;
 

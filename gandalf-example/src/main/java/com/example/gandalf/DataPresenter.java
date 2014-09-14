@@ -4,11 +4,11 @@
  */
 package com.example.gandalf;
 
-import org.android10.gandalf.annotation.DebugTrace;
+import com.fernandocejas.android10.gandalf.annotation.TraceMode;
 
 public class DataPresenter {
 
-  @DebugTrace
+  @TraceMode
   public void getData() {
     sleep(5);
   }
