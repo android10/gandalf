@@ -13,24 +13,24 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 /**
- * Aspect representing the cross cutting-concern: Method and Constructor Tracing.
+ * Aspect representing the cross cutting-concern: Method and Constructor Logging.
  */
 @Aspect
-public class TraceModeAspect {
+public class LoggingAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.TraceMode * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.Loggable * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.TraceMode *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.Loggable *.new(..))";
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithTraceMode() {}
+  public void methodAnnotatedWithLoggable() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedTraceMode() {}
+  public void constructorAnnotatedWithLoggable() {}
 
-  @Around("methodAnnotatedWithTraceMode() || constructorAnnotatedTraceMode()")
+  @Around("methodAnnotatedWithLoggable() || constructorAnnotatedWithLoggable()")
   public Object weaveJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
     MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
     String className = methodSignature.getDeclaringType().getSimpleName();

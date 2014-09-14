@@ -4,13 +4,19 @@
  */
 package com.example.gandalf;
 
-import com.fernandocejas.android10.gandalf.annotation.TraceMode;
+import com.fernandocejas.android10.gandalf.annotation.Loggable;
+import com.fernandocejas.android10.gandalf.annotation.Traceable;
 
 public class DataPresenter {
 
-  @TraceMode
+  @Loggable
   public void getData() {
     sleep(5);
+  }
+
+  @Traceable
+  public void printMessage(String tag, String message) {
+    sleep(2);
   }
 
   private void sleep(long millis) {

@@ -13,5 +13,6 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
 
     dataPresenter.getData();
+    dataPresenter.printMessage("this is tag", "this is message");
   }
 }
