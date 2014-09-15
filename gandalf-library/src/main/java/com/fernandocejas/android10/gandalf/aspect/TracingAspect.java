@@ -32,7 +32,7 @@ public class TracingAspect {
   public void constructorAnnotatedWithTraceable() {}
 
   @Around("methodAnnotatedWithTraceable() || constructorAnnotatedWithTraceable()")
-  public Object weaveJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
+  public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
 
     //Get method information
     MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();

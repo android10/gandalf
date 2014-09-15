@@ -12,11 +12,11 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
- * Simple tracing aspect that prints a message at both entering and exiting method plus method
- * parameter and execution thread. Useful to increase the visibility of the internal workings
- * of a program.
+ * Simple tracing aspect that prints a debug message at both entering and exiting method, plus
+ * method parameter and execution thread. Useful to increase the visibility of the internal
+ * workings of a program.
  *
- * Example of what will be shown in the logcat:
+ * Example of what will be shown in the logcat (only debug version of the app):
  * Gandalf => [Entering :: @Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread]
  * Gandalf => [Exiting :: @Method -> yourMethod() :: @Time -> 5 ms]
  */

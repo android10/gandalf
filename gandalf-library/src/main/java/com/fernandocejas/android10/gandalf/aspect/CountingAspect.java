@@ -6,63 +6,54 @@ package com.fernandocejas.android10.gandalf.aspect;
 
 import com.fernandocejas.android10.gandalf.internal.DebugLog;
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 
 /**
- * Aspect representing the cross cutting-concern: Method and Constructor Logging.
+ * Aspect representing the cross cutting-concern: Method and Constructor Time Counting.
  */
 @Aspect
-public class LoggingAspect {
+public class CountingAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Loggable * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.Countable * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Loggable *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.Countable *.new(..))";
+
+  private int timesExecuted = 0;
+  private long totalExecutionTime = 0;
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithLoggable() {}
+  public void methodAnnotatedWithCountable() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedWithLoggable() {}
+  public void constructorAnnotatedWithCountable() {}
 
-  @Around("methodAnnotatedWithLoggable() || constructorAnnotatedWithLoggable()")
+  @Around("methodAnnotatedWithCountable() || constructorAnnotatedWithCountable()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
     MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
     String className = methodSignature.getDeclaringType().getSimpleName();
     String methodName = methodSignature.getName();
 
+    timesExecuted++;
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
     Object result = joinPoint.proceed();
     stopWatch.stop();
-
-    DebugLog.log(className, buildLogMessage(methodName, stopWatch.getTotalTimeMillis()));
+    totalExecutionTime += stopWatch.getTotalTimeMillis();
 
     return result;
   }
 
-  /**
-   * Create a log message.
-   *
-   * @param methodName A string with the method name.
-   * @param methodDuration Duration of the method in milliseconds.
-   * @return A string representing message.
-   */
-  private static String buildLogMessage(String methodName, long methodDuration) {
-    StringBuilder message = new StringBuilder();
-    message.append("Gandalf --> ");
-    message.append(methodName);
-    message.append(" --> ");
-    message.append("[");
-    message.append(methodDuration);
-    message.append("ms");
-    message.append("]");
-
-    return message.toString();
+  @After("methodAnnotatedWithCountable() || constructorAnnotatedWithCountable()")
+  public void weaveAfterJoinPoint(JoinPoint joinPoint) {
+    DebugLog.log("Penano---->", "Penano----> " + timesExecuted);
+    DebugLog.log("Penano---->", "Penano----> " + totalExecutionTime + " ms");
   }
 }

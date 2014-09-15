@@ -13,28 +13,32 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
- * Indicates that the annotated method is being traced and will use {@link android.util.Log}
+ * Indicates that the annotated method is being logged and will use {@link android.util.Log}
  * to print debug data:
  *
  * - Method signature with parameter values.
- * - Total execution time.
+ * - Current execution thread.
+ * - Execution time.
  *
- * A {@link LoggingLevel} option can be passed to choose the level of logging.
+ * An array of {@link LoggingLevel} options can be passed to choose different levels of logging.
  */
 @Retention(CLASS)
 @Target({ CONSTRUCTOR, METHOD })
 public @interface Loggable {
-  public LoggingLevel value() default EVERYTHING;
+  public LoggingLevel[] value() default EVERYTHING;
 
   /**
    * Logging scope of the current method/constructor.
    */
   public enum LoggingLevel {
-    /** Will log method signature with parameter values and execution time. */
+    /** Will log method signature with parameter values, execution time and execution thread. */
     EVERYTHING,
 
     /** Will log method signature with parameter values. */
     SIGNATURE,
+
+    /** Will log current execution thread name. */
+    THREAD,
 
     /** Will log method execution time. */
     TIME

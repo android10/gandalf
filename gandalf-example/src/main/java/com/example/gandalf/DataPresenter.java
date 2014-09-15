@@ -4,6 +4,7 @@
  */
 package com.example.gandalf;
 
+import com.fernandocejas.android10.gandalf.annotation.Countable;
 import com.fernandocejas.android10.gandalf.annotation.Loggable;
 import com.fernandocejas.android10.gandalf.annotation.Traceable;
 
@@ -16,7 +17,12 @@ public class DataPresenter {
 
   @Traceable
   public void printMessage(String tag, String message) {
-    sleep(2);
+    sleep(10);
+  }
+
+  @Countable
+  public void anotherMethod() {
+    sleep(25);
   }
 
   private void sleep(long millis) {
