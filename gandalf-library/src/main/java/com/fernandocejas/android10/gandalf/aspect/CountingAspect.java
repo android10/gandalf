@@ -4,20 +4,19 @@
  */
 package com.fernandocejas.android10.gandalf.aspect;
 
-import com.fernandocejas.android10.gandalf.internal.DebugLog;
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.DeclarePrecedence;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 
 /**
  * Aspect representing the cross cutting-concern: Method and Constructor Time Counting.
  */
 @Aspect
+@DeclarePrecedence(
+    "com.fernandocejas.android10.gandalf.aspect.CountingAspect, com.fernandocejas.android10.gandalf.aspect.Counter")
 public class CountingAspect {
 
   private static final String POINTCUT_METHOD =
@@ -37,23 +36,21 @@ public class CountingAspect {
 
   @Around("methodAnnotatedWithCountable() || constructorAnnotatedWithCountable()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
-    MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-    String className = methodSignature.getDeclaringType().getSimpleName();
-    String methodName = methodSignature.getName();
-
-    timesExecuted++;
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
     Object result = joinPoint.proceed();
     stopWatch.stop();
+    timesExecuted++;
     totalExecutionTime += stopWatch.getTotalTimeMillis();
 
     return result;
   }
 
-  @After("methodAnnotatedWithCountable() || constructorAnnotatedWithCountable()")
-  public void weaveAfterJoinPoint(JoinPoint joinPoint) {
-    DebugLog.log("Penano---->", "Penano----> " + timesExecuted);
-    DebugLog.log("Penano---->", "Penano----> " + totalExecutionTime + " ms");
+  public long getTotalExecutionTime() {
+    return this.totalExecutionTime;
+  }
+
+  public int getTimesExecuted() {
+    return this.timesExecuted;
   }
 }
