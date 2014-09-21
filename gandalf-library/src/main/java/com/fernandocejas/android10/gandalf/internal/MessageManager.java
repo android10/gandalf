@@ -2,9 +2,6 @@ package com.fernandocejas.android10.gandalf.internal;
 
 import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
 
-/**
- * Helper used for common tasks during the library execution.
- */
 public class MessageManager {
 
   private final MessageBuilder messageBuilder;
@@ -31,6 +28,13 @@ public class MessageManager {
   public void printTraceExitingMessage(GandalfJoinPoint joinPoint, Object returnValue,
       String executionTimeMillis) {
     String exitMessage = this.messageBuilder.buildTraceExitMessage(joinPoint, returnValue,
+        executionTimeMillis);
+    this.printMessage(joinPoint.getClassName(), exitMessage);
+  }
+
+  public void printLogExitingMessage(GandalfJoinPoint joinPoint, Object returnValue,
+      String executionTimeMillis) {
+    String exitMessage = this.messageBuilder.buildLogExitMessage(joinPoint, returnValue,
         executionTimeMillis);
     this.printMessage(joinPoint.getClassName(), exitMessage);
   }

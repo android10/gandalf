@@ -15,6 +15,7 @@ public class MainActivity extends Activity {
 
     dataPresenterOne.getData();
     dataPresenterOne.getData("pi");
+    dataPresenterOne.getData("android10");
 
     //dataPresenterOne.anotherMethod();
     //dataPresenterOne.anotherMethod();
