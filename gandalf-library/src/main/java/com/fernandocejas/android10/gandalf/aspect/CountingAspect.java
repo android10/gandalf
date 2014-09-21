@@ -8,15 +8,12 @@ import com.fernandocejas.android10.gandalf.internal.StopWatch;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.DeclarePrecedence;
 import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * Aspect representing the cross cutting-concern: Method and Constructor Time Counting.
  */
 @Aspect
-@DeclarePrecedence(
-    "com.fernandocejas.android10.gandalf.aspect.CountingAspect, com.fernandocejas.android10.gandalf.aspect.Counter")
 public class CountingAspect {
 
   private static final String POINTCUT_METHOD =

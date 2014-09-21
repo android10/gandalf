@@ -5,13 +5,14 @@
 package com.fernandocejas.android10.gandalf.aspect;
 
 import com.fernandocejas.android10.gandalf.internal.DebugLog;
-import org.aspectj.lang.Aspects;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.DeclarePrecedence;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
+@DeclarePrecedence("com.fernandocejas.android10.gandalf.aspect.CountingAspect")
 public class Counter {
 
   private static final String POINTCUT_METHOD =
@@ -28,10 +29,6 @@ public class Counter {
 
   @After("methodAnnotatedWithCountable() || constructorAnnotatedWithCountable()")
   public void weaveAfterJoinPoint(JoinPoint joinPoint) {
-    int timesExecuted = Aspects.aspectOf(CountingAspect.class).getTimesExecuted();
-    long totalExecutionTime = Aspects.aspectOf(CountingAspect.class).getTotalExecutionTime();
-
-    DebugLog.log("Penano---->", "Penano----> " + timesExecuted);
-    DebugLog.log("Penano---->", "Penano----> " + totalExecutionTime + " ms");
+    DebugLog.log("Counter---->", "Penano----> Counter executed");
   }
 }

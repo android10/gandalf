@@ -5,19 +5,24 @@ import android.os.Bundle;
 
 public class MainActivity extends Activity {
 
-  private final DataPresenter dataPresenter = new DataPresenter();
+  private final DataPresenter dataPresenterOne = new DataPresenter();
+  private final DataPresenter dataPresenterTwo = new DataPresenter();
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    dataPresenter.getData();
+    dataPresenterOne.getData();
 
-    dataPresenter.anotherMethod();
-    dataPresenter.anotherMethod();
-    dataPresenter.anotherMethod();
+    dataPresenterOne.anotherMethod();
+    dataPresenterOne.anotherMethod();
+    dataPresenterOne.anotherMethod();
 
-    dataPresenter.printMessage("this is tag", "this is message");
+    dataPresenterTwo.anotherMethod();
+    dataPresenterTwo.anotherMethod();
+    dataPresenterTwo.anotherMethod();
+
+    dataPresenterOne.printMessage("this is tag", "this is message");
   }
 }
