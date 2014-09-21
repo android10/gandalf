@@ -5,6 +5,7 @@
 package com.fernandocejas.android10.gandalf.aspect;
 
 import android.util.Log;
+import com.fernandocejas.android10.gandalf.internal.MessageManager;
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -23,6 +24,16 @@ public class LoggingAspect {
 
   private static final String POINTCUT_CONSTRUCTOR =
       "execution(@com.fernandocejas.android10.gandalf.annotation.Loggable *.new(..))";
+
+  private final MessageManager messageManager;
+
+  public LoggingAspect() {
+    this(new MessageManager());
+  }
+
+  public LoggingAspect(MessageManager messageManager) {
+    this.messageManager = new MessageManager();
+  }
 
   @Pointcut(POINTCUT_METHOD)
   public void methodAnnotatedWithLoggable() {}
