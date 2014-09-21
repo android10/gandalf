@@ -4,9 +4,11 @@
  */
 package com.fernandocejas.android10.gandalf.aspect;
 
+import com.fernandocejas.android10.gandalf.annotation.Loggable;
 import com.fernandocejas.android10.gandalf.internal.MessageManager;
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
 import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
+import java.lang.annotation.Annotation;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -45,14 +47,34 @@ public class LoggingAspect {
 
     GandalfJoinPoint gandalfJoinPoint = new GandalfJoinPoint(joinPoint);
 
-    //TODO: check different logging scope
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
     Object result = joinPoint.proceed();
     stopWatch.stop();
 
-    this.messageManager.printLogExitingMessage(gandalfJoinPoint, result,
-        String.valueOf(stopWatch.getTotalTimeMillis()));
+    Annotation annotation = gandalfJoinPoint.getAnnotation(Loggable.class);
+    if (annotation != null) {
+      switch (((Loggable) annotation).value()) {
+        case SIGNATURE:
+          this.messageManager.printLoggingAspectMessageSignature(gandalfJoinPoint, result);
+          break;
+        case THREAD:
+          this.messageManager.printLoggingAspectMessageThread(gandalfJoinPoint);
+          break;
+        case TIME:
+          this.messageManager.printLoggingAspectMessageTime(gandalfJoinPoint,
+              String.valueOf(stopWatch.getTotalTimeMillis()));
+          break;
+        case EVERYTHING:
+        default:
+          this.messageManager.printLoggingAspectMessageEverything(gandalfJoinPoint, result,
+              String.valueOf(stopWatch.getTotalTimeMillis()));
+          break;
+      }
+    } else {
+      this.messageManager.printLoggingAspectMessageEverything(gandalfJoinPoint, result,
+          String.valueOf(stopWatch.getTotalTimeMillis()));
+    }
 
     return result;
   }

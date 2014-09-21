@@ -8,15 +8,30 @@ import com.fernandocejas.android10.gandalf.annotation.Countable;
 import com.fernandocejas.android10.gandalf.annotation.Loggable;
 import com.fernandocejas.android10.gandalf.annotation.Traceable;
 
+import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.EVERYTHING;
+import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.SIGNATURE;
+import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.THREAD;
+import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.TIME;
+
 public class DataPresenter {
 
-  @Loggable
+  @Loggable(EVERYTHING)
   public void getData() {
     sleep(5);
   }
 
-  @Loggable
+  @Loggable(TIME)
   public void getData(String name) {
+    sleep(5);
+  }
+
+  @Loggable(SIGNATURE)
+  public void getData(String name, int quantity) {
+    sleep(5);
+  }
+
+  @Loggable(THREAD)
+  public void getData(String name, int quantity, int count) {
     sleep(5);
   }
 

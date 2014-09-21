@@ -20,22 +20,40 @@ public class MessageManager {
     this.debugLog.log(tag, message);
   }
 
-  public void printTraceEnteringMessage(GandalfJoinPoint joinPoint) {
-    String enterMessage = this.messageBuilder.buildTraceEnterMessage(joinPoint);
-    this.printMessage(joinPoint.getClassName(), enterMessage);
+  public void printTracingAspectEnterMessage(GandalfJoinPoint joinPoint) {
+    String message = this.messageBuilder.buildTracingAspectEnterMessage(joinPoint);
+    this.printMessage(joinPoint.getClassName(), message);
   }
 
-  public void printTraceExitingMessage(GandalfJoinPoint joinPoint, Object returnValue,
+  public void printTracingAspectExitMessage(GandalfJoinPoint joinPoint, Object returnValue,
       String executionTimeMillis) {
-    String exitMessage = this.messageBuilder.buildTraceExitMessage(joinPoint, returnValue,
+    String message = this.messageBuilder.buildTracingAspectExitMessage(joinPoint, returnValue,
         executionTimeMillis);
-    this.printMessage(joinPoint.getClassName(), exitMessage);
+    this.printMessage(joinPoint.getClassName(), message);
   }
 
-  public void printLogExitingMessage(GandalfJoinPoint joinPoint, Object returnValue,
+  public void printLoggingAspectMessageEverything(GandalfJoinPoint joinPoint, Object returnValue,
       String executionTimeMillis) {
-    String exitMessage = this.messageBuilder.buildLogExitMessage(joinPoint, returnValue,
+    String message = this.messageBuilder.buildLoggingAspectMessageEverything(joinPoint,
+        returnValue, executionTimeMillis);
+    this.printMessage(joinPoint.getClassName(), message);
+  }
+
+  public void printLoggingAspectMessageSignature(GandalfJoinPoint joinPoint, Object returnValue) {
+    String message = this.messageBuilder.buildLoggingAspectMessageSignature(joinPoint,
+        returnValue);
+    this.printMessage(joinPoint.getClassName(), message);
+  }
+
+  public void printLoggingAspectMessageThread(GandalfJoinPoint joinPoint) {
+    String message = this.messageBuilder.buildLoggingAspectMessageThread(joinPoint);
+    this.printMessage(joinPoint.getClassName(), message);
+  }
+
+  public void printLoggingAspectMessageTime(GandalfJoinPoint joinPoint,
+      String executionTimeMillis) {
+    String message = this.messageBuilder.buildLoggingAspectMessageTime(joinPoint,
         executionTimeMillis);
-    this.printMessage(joinPoint.getClassName(), exitMessage);
+    this.printMessage(joinPoint.getClassName(), message);
   }
 }

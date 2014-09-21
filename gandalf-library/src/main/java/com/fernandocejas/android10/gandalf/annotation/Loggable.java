@@ -7,10 +7,10 @@ package com.fernandocejas.android10.gandalf.annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.*;
+import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.EVERYTHING;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.CLASS;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Simple logging aspect that indicates that the annotated method is being logged (application debug
@@ -20,17 +20,17 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  * - Current execution thread.
  * - Total execution time.
  *
- * An array of {@link LoggingLevel} options can be passed to choose different levels of logging.
+ * A {@link LoggingLevel} option can be passed to choose different logging level information.
  *
  * Example of the output logging everything using {@link LoggingLevel#EVERYTHING default option}
  * will be:
  *
  * Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]
  */
-@Retention(CLASS)
+@Retention(RUNTIME)
 @Target({ CONSTRUCTOR, METHOD })
 public @interface Loggable {
-  public LoggingLevel[] value() default EVERYTHING;
+  public LoggingLevel value() default EVERYTHING;
 
   /**
    * Logging scope of the current method/constructor annotated.

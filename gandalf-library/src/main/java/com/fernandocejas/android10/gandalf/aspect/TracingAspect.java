@@ -44,14 +44,14 @@ public class TracingAspect {
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
 
     GandalfJoinPoint gandalfJoinPoint = new GandalfJoinPoint(joinPoint);
-    this.messageManager.printTraceEnteringMessage(gandalfJoinPoint);
+    this.messageManager.printTracingAspectEnterMessage(gandalfJoinPoint);
 
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
     Object result = joinPoint.proceed();
     stopWatch.stop();
 
-    this.messageManager.printTraceExitingMessage(gandalfJoinPoint, result,
+    this.messageManager.printTracingAspectExitMessage(gandalfJoinPoint, result,
         String.valueOf(stopWatch.getTotalTimeMillis()));
 
     return result;

@@ -24,7 +24,7 @@ public class MessageBuilder {
 
   public MessageBuilder() {}
 
-  protected String buildTraceEnterMessage(GandalfJoinPoint joinPoint) {
+  protected String buildTracingAspectEnterMessage(GandalfJoinPoint joinPoint) {
 
     StringBuilder message = new StringBuilder(LIBRARY_LABEL);
     message.append(LOG_ENCLOSING_OPEN);
@@ -41,7 +41,7 @@ public class MessageBuilder {
     return message.toString();
   }
 
-  protected String buildTraceExitMessage(GandalfJoinPoint joinPoint, Object returnValue,
+  protected String buildTracingAspectExitMessage(GandalfJoinPoint joinPoint, Object returnValue,
       String executionTimeMillis) {
 
     StringBuilder message = new StringBuilder(LIBRARY_LABEL);
@@ -60,7 +60,8 @@ public class MessageBuilder {
     return message.toString();
   }
 
-  protected String buildLogExitMessage(GandalfJoinPoint joinPoint, Object returnValue,
+  protected String buildLoggingAspectMessageEverything(GandalfJoinPoint joinPoint,
+      Object returnValue,
       String executionTimeMillis) {
 
     StringBuilder message = new StringBuilder(LIBRARY_LABEL);
@@ -81,11 +82,57 @@ public class MessageBuilder {
     return message.toString();
   }
 
+  protected String buildLoggingAspectMessageSignature(GandalfJoinPoint joinPoint,
+      Object returnValue) {
+
+    StringBuilder message = new StringBuilder(LIBRARY_LABEL);
+    message.append(LOG_ENCLOSING_OPEN);
+    message.append(METHOD_LABEL);
+    message.append(joinPoint.getMethodName());
+    message.append(buildMethodSignature(joinPoint));
+    message.append(buildMethodReturningValue(returnValue));
+    message.append(LOG_ENCLOSING_CLOSE);
+
+    return message.toString();
+  }
+
+  protected String buildLoggingAspectMessageThread(GandalfJoinPoint joinPoint) {
+
+    StringBuilder message = new StringBuilder(LIBRARY_LABEL);
+    message.append(LOG_ENCLOSING_OPEN);
+    message.append(METHOD_LABEL);
+    message.append(joinPoint.getMethodName());
+    message.append(buildMethodSignature(joinPoint));
+    message.append(SEPARATOR);
+    message.append(THREAD_LABEL);
+    message.append(joinPoint.getExecutionThreadName());
+    message.append(LOG_ENCLOSING_CLOSE);
+
+    return message.toString();
+  }
+
+  protected String buildLoggingAspectMessageTime(GandalfJoinPoint joinPoint,
+      String executionTimeMillis) {
+
+    StringBuilder message = new StringBuilder(LIBRARY_LABEL);
+    message.append(LOG_ENCLOSING_OPEN);
+    message.append(METHOD_LABEL);
+    message.append(joinPoint.getMethodName());
+    message.append(buildMethodSignature(joinPoint));
+    message.append(SEPARATOR);
+    message.append(TIME_LABEL);
+    message.append(executionTimeMillis);
+    message.append(TIME_MILLIS);
+    message.append(LOG_ENCLOSING_CLOSE);
+
+    return message.toString();
+  }
+
   private String buildMethodSignature(GandalfJoinPoint joinPoint) {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("(");
     List<String> methodParamNames = joinPoint.getMethodParamNamesList();
-    if (methodParamNames != null && methodParamNames.size() >= 0) {
+    if (methodParamNames != null && !methodParamNames.isEmpty()) {
       for (int i = 0; i < joinPoint.getMethodParamNamesList().size(); i++) {
         stringBuilder.append(methodParamNames.get(i));
         stringBuilder.append("=");

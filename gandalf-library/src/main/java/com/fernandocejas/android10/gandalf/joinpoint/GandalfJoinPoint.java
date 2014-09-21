@@ -4,9 +4,12 @@
  */
 package com.fernandocejas.android10.gandalf.joinpoint;
 
+import android.os.Looper;
+import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.List;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 
 /**
@@ -15,6 +18,8 @@ import org.aspectj.lang.reflect.MethodSignature;
  */
 public class GandalfJoinPoint {
 
+  private final JoinPoint joinPoint;
+  private final MethodSignature methodSignature;
   private final String className;
   private final String methodName;
   private final List<String> methodParamNamesList;
@@ -23,18 +28,20 @@ public class GandalfJoinPoint {
 
   /**
    * Constructor of the class
-   * @param JoinPoint object to wrap around.
+   *
+   * @param joinPoint object to wrap around.
    */
-  public GandalfJoinPoint(JoinPoint JoinPoint) {
-    if (JoinPoint == null) {
+  public GandalfJoinPoint(JoinPoint joinPoint) {
+    if (joinPoint == null) {
       throw new IllegalArgumentException("Constructor parameters cannot be null!!!");
     }
 
-    MethodSignature methodSignature = (MethodSignature) JoinPoint.getSignature();
-    this.className = methodSignature.getDeclaringType().getSimpleName();
-    this.methodName = methodSignature.getName();
-    this.methodParamNamesList = Arrays.asList(methodSignature.getParameterNames());
-    this.methodParamValuesList = Arrays.asList(JoinPoint.getArgs());
+    this.joinPoint = joinPoint;
+    this.methodSignature = (MethodSignature) this.joinPoint.getSignature();
+    this.className = this.methodSignature.getDeclaringType().getSimpleName();
+    this.methodName = this.methodSignature.getName();
+    this.methodParamNamesList = Arrays.asList(this.methodSignature.getParameterNames());
+    this.methodParamValuesList = Arrays.asList(this.joinPoint.getArgs());
     this.executionThreadName = Thread.currentThread().getName();
   }
 
@@ -56,5 +63,39 @@ public class GandalfJoinPoint {
 
   public String getExecutionThreadName() {
     return executionThreadName;
+  }
+
+  /**
+   * Gets an annotation from a method, will return null in case it does not exist.
+   * It is important to have a retention policy of
+   * {@link java.lang.annotation.RetentionPolicy#RUNTIME} to avoid null values when reading them.
+   *
+   * @param annotation The {@link java.lang.annotation.Annotation} to get.
+   * @return The annotation if exists, otherwise null.
+   */
+  public Annotation getAnnotation(Class<? extends Annotation> annotation) {
+    return methodSignature.getMethod().getAnnotation(annotation);
+  }
+
+  /**
+   * Check if the {@link JoinPoint} is being executed in the main thread.
+   *
+   * @return true: main thread, otherwise false.
+   */
+  public boolean isMainThread() {
+    return (Looper.getMainLooper() == Looper.myLooper());
+  }
+
+  /**
+   * Check if the {@link JoinPoint} has a return type.
+   *
+   * @param joinPoint the {@link JoinPoint} to check.
+   * @return true if there is a return type, false if it is void.
+   */
+  public boolean hasReturnType(JoinPoint joinPoint) {
+    Signature signature = joinPoint.getSignature();
+
+    return (signature instanceof MethodSignature
+        && ((MethodSignature) signature).getReturnType() != void.class);
   }
 }
