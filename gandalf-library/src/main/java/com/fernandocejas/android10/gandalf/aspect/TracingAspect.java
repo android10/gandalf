@@ -4,14 +4,13 @@
  */
 package com.fernandocejas.android10.gandalf.aspect;
 
-import com.fernandocejas.android10.gandalf.MessageBuilder;
-import com.fernandocejas.android10.gandalf.internal.DebugLog;
+import com.fernandocejas.android10.gandalf.internal.MessageManager;
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.aspectj.lang.reflect.MethodSignature;
 
 /**
  * Aspect representing the cross cutting-concern: Method Tracing.
@@ -25,6 +24,16 @@ public class TracingAspect {
   private static final String POINTCUT_CONSTRUCTOR =
       "execution(@com.fernandocejas.android10.gandalf.annotation.Traceable *.new(..))";
 
+  private final MessageManager messageManager;
+
+  public TracingAspect() {
+    this(new MessageManager());
+  }
+
+  public TracingAspect(MessageManager messageManager) {
+    this.messageManager = new MessageManager();
+  }
+
   @Pointcut(POINTCUT_METHOD)
   public void methodAnnotatedWithTraceable() {}
 
@@ -34,41 +43,17 @@ public class TracingAspect {
   @Around("methodAnnotatedWithTraceable() || constructorAnnotatedWithTraceable()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
 
-    //Get method information
-    MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-    String className = methodSignature.getDeclaringType().getSimpleName();
-    String methodName = methodSignature.getName();
-    String[] methodParams = methodSignature.getParameterNames();
-    Object[] methodParamValues = joinPoint.getArgs();
-    String threadName = Thread.currentThread().getName();
+    GandalfJoinPoint gandalfJoinPoint = new GandalfJoinPoint(joinPoint);
+    this.messageManager.printTraceEnteringMessage(gandalfJoinPoint);
 
-    //Build enter message
-    String enterMessage =
-        buildEnterMessage(threadName, methodName, methodParams, methodParamValues);
-    DebugLog.log(className, enterMessage);
-
-    //We start to count and execute method
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
     Object result = joinPoint.proceed();
     stopWatch.stop();
 
-    //Build exit message
-    String returnValue = (result != null) ? String.valueOf(result) : null;
-    String exitMessage =
-        buildExitMessage(methodName, returnValue, String.valueOf(stopWatch.getTotalTimeMillis()));
-    DebugLog.log(className, exitMessage);
+    this.messageManager.printTraceExitingMessage(gandalfJoinPoint, result,
+        String.valueOf(stopWatch.getTotalTimeMillis()));
 
     return result;
-  }
-
-  private static String buildEnterMessage(String threadName, String methodName,
-      String[] methodParams, Object[] methodParamValues) {
-    return MessageBuilder.buildTraceEnterMessage(threadName, methodName, methodParams,
-        methodParamValues);
-  }
-
-  private static String buildExitMessage(String methodName, String returnValue, String timeMillis) {
-    return MessageBuilder.buildTraceExitMessage(methodName, returnValue, timeMillis);
   }
 }

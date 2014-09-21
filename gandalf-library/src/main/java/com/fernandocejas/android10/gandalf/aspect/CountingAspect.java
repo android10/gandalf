@@ -5,6 +5,8 @@
 package com.fernandocejas.android10.gandalf.aspect;
 
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,6 +23,8 @@ public class CountingAspect {
 
   private static final String POINTCUT_CONSTRUCTOR =
       "execution(@com.fernandocejas.android10.gandalf.annotation.Countable *.new(..))";
+
+  private Map<String, String> methodStatsMap = new ConcurrentHashMap<String, String>();
 
   private int timesExecuted = 0;
   private long totalExecutionTime = 0;

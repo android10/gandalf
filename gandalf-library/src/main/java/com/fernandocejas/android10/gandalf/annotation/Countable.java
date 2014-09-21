@@ -16,7 +16,7 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  * Indicates that the annotated method will count:
  *
  * - Number of instances of a class created (if a CLASS is annotated).
- * - Number of times it was executed (if a METHOD is annotated).
+ * - Number of times executed (if a METHOD is annotated).
  * - Total execution time accumulated (if a METHOD is annotated).
  *
  * The information will be printed once the application is destroyed or finished so the results

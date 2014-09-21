@@ -14,14 +14,15 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
 
     dataPresenterOne.getData();
+    dataPresenterOne.getData("pi");
 
-    dataPresenterOne.anotherMethod();
-    dataPresenterOne.anotherMethod();
-    dataPresenterOne.anotherMethod();
-
-    dataPresenterTwo.anotherMethod();
-    dataPresenterTwo.anotherMethod();
-    dataPresenterTwo.anotherMethod();
+    //dataPresenterOne.anotherMethod();
+    //dataPresenterOne.anotherMethod();
+    //dataPresenterOne.anotherMethod();
+    //
+    //dataPresenterTwo.anotherMethod();
+    //dataPresenterTwo.anotherMethod();
+    //dataPresenterTwo.anotherMethod();
 
     dataPresenterOne.printMessage("this is tag", "this is message");
   }

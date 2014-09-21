@@ -15,6 +15,11 @@ public class DataPresenter {
     sleep(5);
   }
 
+  @Loggable
+  public void getData(String name) {
+    sleep(5);
+  }
+
   @Traceable
   public void printMessage(String tag, String message) {
     sleep(10);

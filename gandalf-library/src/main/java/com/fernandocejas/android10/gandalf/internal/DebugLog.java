@@ -11,7 +11,7 @@ import android.util.Log;
  */
 public class DebugLog {
 
-  private DebugLog() {}
+  public DebugLog() {}
 
   /**
    * Send a debug log message
@@ -20,7 +20,7 @@ public class DebugLog {
    * call occurs.
    * @param message The message you would like logged.
    */
-  public static void log(String tag, String message) {
+  public void log(String tag, String message) {
     Log.d(tag, message);
   }
 }

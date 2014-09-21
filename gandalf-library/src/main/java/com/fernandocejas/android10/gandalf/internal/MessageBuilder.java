@@ -1,7 +1,11 @@
-package com.fernandocejas.android10.gandalf;
+package com.fernandocejas.android10.gandalf.internal;
+
+import com.fernandocejas.android10.gandalf.Gandalf;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
+import java.util.List;
 
 /**
- * Helper used for common tasks during the library execution.
+ * Class used to build different messages that will be shown in debug mode
  */
 public class MessageBuilder {
 
@@ -14,8 +18,9 @@ public class MessageBuilder {
   private static final String LOG_ENCLOSING_CLOSE = "]";
   private static final String TIME_MILLIS = " ms";
 
-  public static String buildTraceEnterMessage(String threadName, String methodName,
-      String[] methodParams, Object[] methodParamValues) {
+  public MessageBuilder() {}
+
+  protected String buildTraceEnterMessage(GandalfJoinPoint joinPoint) {
 
     StringBuilder message = new StringBuilder();
     message.append(LIBRARY_LABEL);
@@ -23,37 +28,34 @@ public class MessageBuilder {
     message.append("Entering");
     message.append(SEPARATOR);
     message.append(METHOD_LABEL);
-    message.append(methodName);
+    message.append(joinPoint.getMethodName());
 
-    //Loop through all the method params
-    if (methodParams != null
-        && methodParams.length != 0
-        && methodParamValues != null
-        && methodParams.length != methodParamValues.length) {
-      message.append("(");
-      for (int i = 0; i < methodParams.length; i++) {
-        message.append(methodParams[i]);
+    message.append("(");
+    List<String> methodParamNames = joinPoint.getMethodParamNamesList();
+    if (methodParamNames != null && methodParamNames.size() >= 0) {
+      for (int i = 0; i < joinPoint.getMethodParamNamesList().size(); i++) {
+        message.append(methodParamNames.get(i));
         message.append("=");
         message.append("'");
-        message.append(String.valueOf(methodParamValues[i]));
+        message.append(String.valueOf(joinPoint.getMethodParamValuesList().get(i)));
         message.append("'");
-        if (!(i == methodParams.length - 1)) {
-          message.append("; ");
+        if (!(i == methodParamNames.size() - 1)) {
+          message.append(", ");
         }
       }
-      message.append(")");
     }
+    message.append(")");
 
     message.append(SEPARATOR);
     message.append(THREAD_LABEL);
-    message.append(threadName);
+    message.append(joinPoint.getExecutionThreadName());
     message.append(LOG_ENCLOSING_CLOSE);
 
     return message.toString();
   }
 
-  public static String buildTraceExitMessage(String methodName, String returnValue,
-      String timeMillis) {
+  protected String buildTraceExitMessage(GandalfJoinPoint joinPoint, Object returnValue,
+      String executionTimeMillis) {
 
     StringBuilder message = new StringBuilder();
     message.append(LIBRARY_LABEL);
@@ -61,17 +63,18 @@ public class MessageBuilder {
     message.append("Exiting");
     message.append(SEPARATOR);
     message.append(METHOD_LABEL);
-    message.append(methodName);
+    message.append(joinPoint.getMethodName());
 
     //Let's check if there is a return value
-    if (returnValue != null && returnValue.trim().length() != 0) {
+    String stringReturnValue = (returnValue != null) ? String.valueOf(returnValue) : null;
+    if (stringReturnValue != null && stringReturnValue.trim().length() != 0) {
       message.append(" returning ");
-      message.append(returnValue);
+      message.append(stringReturnValue);
     }
 
     message.append(SEPARATOR);
     message.append(TIME_LABEL);
-    message.append(timeMillis);
+    message.append(executionTimeMillis);
     message.append(TIME_MILLIS);
     message.append(LOG_ENCLOSING_CLOSE);
 

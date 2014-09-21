@@ -13,14 +13,19 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
- * Indicates that the annotated method is being logged and will use {@link android.util.Log}
- * to print debug data:
+ * Simple logging aspect that indicates that the annotated method is being logged (application debug
+ * type only) and will print:
  *
  * - Method signature with parameter values.
  * - Current execution thread.
- * - Execution time.
+ * - Total execution time.
  *
  * An array of {@link LoggingLevel} options can be passed to choose different levels of logging.
+ *
+ * Example of the output logging everything using {@link LoggingLevel#EVERYTHING default option}
+ * will be:
+ *
+ * Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]
  */
 @Retention(CLASS)
 @Target({ CONSTRUCTOR, METHOD })
@@ -28,7 +33,7 @@ public @interface Loggable {
   public LoggingLevel[] value() default EVERYTHING;
 
   /**
-   * Logging scope of the current method/constructor.
+   * Logging scope of the current method/constructor annotated.
    */
   public enum LoggingLevel {
     /** Will log method signature with parameter values, execution time and execution thread. */
@@ -37,10 +42,10 @@ public @interface Loggable {
     /** Will log method signature with parameter values. */
     SIGNATURE,
 
-    /** Will log current execution thread name. */
+    /** Will log method name and current execution thread name. */
     THREAD,
 
-    /** Will log method execution time. */
+    /** Will log method name and execution time. */
     TIME
   }
 }

@@ -4,7 +4,7 @@
  */
 package com.fernandocejas.android10.gandalf.aspect;
 
-import com.fernandocejas.android10.gandalf.internal.DebugLog;
+import android.util.Log;
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -41,7 +41,7 @@ public class LoggingAspect {
     Object result = joinPoint.proceed();
     stopWatch.stop();
 
-    DebugLog.log(className, buildLogMessage(methodName, stopWatch.getTotalTimeMillis()));
+    Log.d(className, buildLogMessage(methodName, stopWatch.getTotalTimeMillis()));
 
     return result;
   }

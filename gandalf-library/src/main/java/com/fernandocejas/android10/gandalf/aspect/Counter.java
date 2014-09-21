@@ -4,7 +4,6 @@
  */
 package com.fernandocejas.android10.gandalf.aspect;
 
-import com.fernandocejas.android10.gandalf.internal.DebugLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -29,6 +28,6 @@ public class Counter {
 
   @After("methodAnnotatedWithCountable() || constructorAnnotatedWithCountable()")
   public void weaveAfterJoinPoint(JoinPoint joinPoint) {
-    DebugLog.log("Counter---->", "Penano----> Counter executed");
+    //DebugLog.log("Counter---->", "Penano----> Counter executed");
   }
 }
