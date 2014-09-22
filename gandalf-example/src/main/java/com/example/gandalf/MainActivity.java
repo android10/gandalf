@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
 
     dataPresenterOne.getData();
-    //dataPresenterOne.getData("pi");
+    dataPresenterOne.getData("pi");
     dataPresenterOne.getData("android10");
     dataPresenterOne.getData("fernando", 1);
     dataPresenterOne.getData("fernando", 1, 1);
