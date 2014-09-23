@@ -13,29 +13,29 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 
 /**
- * Aspect representing the cross cutting-concern: Method and Constructor Time Counting.
+ * Aspect representing the cross cutting-concern: Stats tracking.
  */
 @Aspect
-public class CountingAspect {
+public class TrackingAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Countable * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.Trackable * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Countable *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.Trackable *.new(..))";
 
-  private Map<String, String> methodStatsMap = new ConcurrentHashMap<String, String>();
+  private Map<String, String> statsMap = new ConcurrentHashMap<String, String>();
 
   private int timesExecuted = 0;
   private long totalExecutionTime = 0;
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithCountable() {}
+  public void methodAnnotatedWithTrackable() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedWithCountable() {}
+  public void constructorAnnotatedWithTrackable() {}
 
-  @Around("methodAnnotatedWithCountable() || constructorAnnotatedWithCountable()")
+  @Around("methodAnnotatedWithTrackable() || constructorAnnotatedWithTrackable()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
@@ -45,13 +45,5 @@ public class CountingAspect {
     totalExecutionTime += stopWatch.getTotalTimeMillis();
 
     return result;
-  }
-
-  public long getTotalExecutionTime() {
-    return this.totalExecutionTime;
-  }
-
-  public int getTimesExecuted() {
-    return this.timesExecuted;
   }
 }

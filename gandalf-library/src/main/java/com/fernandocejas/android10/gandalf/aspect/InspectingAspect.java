@@ -12,16 +12,22 @@ import org.aspectj.lang.annotation.DeclarePrecedence;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
-@DeclarePrecedence("com.fernandocejas.android10.gandalf.aspect.CountingAspect")
-public class StatsAspect {
+@DeclarePrecedence("com.fernandocejas.android10.gandalf.aspect.TrackingAspect")
+public class InspectingAspect {
 
   private static final String POINTCUT_APPLICATION_CREATE =
-      "execution(void *android.app.Activity+.*onCreate(..))";
+      "execution(void *android.app.Application+.*onCreate(..))";
 
   private static final String POINTCUT_APPLICATION_DESTROY =
+      "execution(void *android.app.Application+.*onTerminate(..))";
+
+  private static final String POINTCUT_ACTIVITY_CREATE =
       "execution(void *android.app.Activity+.*onCreate(..))";
 
-  public StatsAspect() {}
+  private static final String POINTCUT_ACTIVITY_DESTROY =
+      "execution(void *android.app.Activity+.*onDestroy(..))";
+
+  public InspectingAspect() {}
 
   @Pointcut(POINTCUT_APPLICATION_CREATE)
   public void onApplicationCreated() {}
@@ -31,11 +37,11 @@ public class StatsAspect {
 
   @After("onApplicationCreated()")
   public void weaveAfterApplicationCreated(JoinPoint joinPoint) {
-    new DebugLog().log("Stats---->", "Penano----> onActivityCreated!!!");
+    new DebugLog().log("Stats---->", "Penano----> onApplicationCreated!!!");
   }
 
   @After("onApplicationDestroyed()")
   public void weaveAfterApplicationDestroyed(JoinPoint joinPoint) {
-    new DebugLog().log("Stats---->", "Penano----> onActivityDestroyed!!!");
+    new DebugLog().log("Stats---->", "Penano----> onApplicationTerminated!!!");
   }
 }

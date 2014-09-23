@@ -13,19 +13,19 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Simple logging aspect that indicates that the annotated method is being logged (application debug
- * type only) and will print:
+ * <br>Simple logging aspect that indicates that the annotated method is being logged (application debug
+ * type only) and will print:<br>
  *
- * - Method signature with parameter values.
- * - Current execution thread.
- * - Total execution time.
+ * <br>- Method signature with parameter values.
+ * <br>- Current execution thread.
+ * <br>- Total execution time.
  *
- * A {@link LoggingLevel} option can be passed to choose different logging level information.
+ * <br><br>A {@link LoggingLevel} option can be passed to choose different logging level information.
  *
- * Example of the output logging everything using {@link LoggingLevel#EVERYTHING default option}
- * will be:
+ * <br>Example of the output logging everything using {@link LoggingLevel#EVERYTHING}
+ * will be:<br>
  *
- * Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]
+ * <br>Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]
  */
 @Retention(RUNTIME)
 @Target({ CONSTRUCTOR, METHOD })

@@ -4,7 +4,7 @@
  */
 package com.example.gandalf;
 
-import com.fernandocejas.android10.gandalf.annotation.Countable;
+import com.fernandocejas.android10.gandalf.annotation.Trackable;
 import com.fernandocejas.android10.gandalf.annotation.Loggable;
 import com.fernandocejas.android10.gandalf.annotation.Traceable;
 
@@ -40,7 +40,7 @@ public class DataPresenter {
     sleep(10);
   }
 
-  @Countable
+  @Trackable
   public void anotherMethod() {
     sleep(25);
   }
