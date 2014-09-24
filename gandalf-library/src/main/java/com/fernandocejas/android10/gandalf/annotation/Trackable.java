@@ -9,15 +9,13 @@ import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
  * <br>Indicates that the annotated method will collect stats like:<br>
  *
- * <br>- Number of instances of a class created (if a CLASS is annotated).
- * <br>- Number of times executed (if a METHOD is annotated).
- * <br>- Total execution time accumulated (if a METHOD is annotated).
+ * <br>- Number of times executed.
+ * <br>- Total execution time accumulated.
  *
  * <br><br>TO REMEMBER:<br>
  * <br>To see the stats, at any point, you just call
@@ -26,5 +24,5 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  * {@link com.fernandocejas.android10.gandalf.internal.DebugLog}.
  */
 @Retention(CLASS)
-@Target({TYPE, CONSTRUCTOR, METHOD })
+@Target({CONSTRUCTOR, METHOD })
 public @interface Trackable {}

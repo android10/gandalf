@@ -4,6 +4,12 @@
  */
 package com.fernandocejas.android10.gandalf;
 
+import com.fernandocejas.android10.gandalf.aspect.TrackingAspect;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPointStats;
+import java.util.Map;
+import org.aspectj.lang.Aspects;
+
 /**
  * <br>Gandalf development and debug utilities.<br>
  * You can use this class to setup the library.<br>
@@ -41,5 +47,6 @@ public final class Gandalf {
       //TODO: print gandalf collected stats
     }
     //TODO: print collected stats
+    Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap =  Aspects.aspectOf(TrackingAspect.class).getStatsMap();
   }
 }

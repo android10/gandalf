@@ -98,4 +98,14 @@ public class GandalfJoinPoint {
     return (signature instanceof MethodSignature
         && ((MethodSignature) signature).getReturnType() != void.class);
   }
+
+  @Override public boolean equals(Object o) {
+    //TODO:
+    return super.equals(o);
+  }
+
+  @Override public int hashCode() {
+    //TODO:
+    return super.hashCode();
+  }
 }

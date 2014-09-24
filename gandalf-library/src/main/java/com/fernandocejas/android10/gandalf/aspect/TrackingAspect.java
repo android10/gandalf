@@ -5,6 +5,8 @@
 package com.fernandocejas.android10.gandalf.aspect;
 
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPointStats;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -24,10 +26,8 @@ public class TrackingAspect {
   private static final String POINTCUT_CONSTRUCTOR =
       "execution(@com.fernandocejas.android10.gandalf.annotation.Trackable *.new(..))";
 
-  private Map<String, String> statsMap = new ConcurrentHashMap<String, String>();
-
-  private int timesExecuted = 0;
-  private long totalExecutionTime = 0;
+  private Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap =
+      new ConcurrentHashMap<GandalfJoinPoint, GandalfJoinPointStats>();
 
   @Pointcut(POINTCUT_METHOD)
   public void methodAnnotatedWithTrackable() {}
@@ -41,9 +41,22 @@ public class TrackingAspect {
     stopWatch.start();
     Object result = joinPoint.proceed();
     stopWatch.stop();
-    timesExecuted++;
-    totalExecutionTime += stopWatch.getTotalTimeMillis();
+
+    GandalfJoinPoint gandalfJoinPoint = new GandalfJoinPoint(joinPoint);
+    GandalfJoinPointStats gandalfJoinPointStats;
+    if (this.statsMap.containsKey(gandalfJoinPoint)) {
+      gandalfJoinPointStats = this.statsMap.get(gandalfJoinPoint);
+    } else {
+      gandalfJoinPointStats = new GandalfJoinPointStats(gandalfJoinPoint);
+      this.statsMap.put(gandalfJoinPoint, gandalfJoinPointStats);
+    }
+    gandalfJoinPointStats.incrementTimesExecuted();
+    gandalfJoinPointStats.accumulateExecutionTime(stopWatch.getTotalTimeMillis());
 
     return result;
+  }
+
+  public Map<GandalfJoinPoint, GandalfJoinPointStats> getStatsMap() {
+    return this.statsMap;
   }
 }
