@@ -28,25 +28,43 @@ public final class Gandalf {
 
   private Gandalf() {}
 
+  /**
+   * Enable Gandalf to collect stats automatically.<br>
+   * To see the stats, at any point, you just call
+   * {@link com.fernandocejas.android10.gandalf.Gandalf#printStats()}, thus, the information will be
+   * printed in the logcat only in debug mode.
+   */
   public static void enableInspectionMode() {
     inspectMode = true;
   }
 
+  /**
+   * Disable Gandalf to collect stats automatically.<br>
+   * To enable this flag again call {@link #enableInspectionMode()}.
+   */
   public static void disableInspectionMode() {
     inspectMode = false;
   }
 
   /**
-   * Print stats collected by annotation
-   * {@link com.fernandocejas.android10.gandalf.annotation.Trackable}.<br>
+   * Print both stats collected by annotation
+   * {@link com.fernandocejas.android10.gandalf.annotation.Trackable} and Gandalf collected
+   * stats if Inspection Mode is enable via method {@link #enableInspectionMode()}.<br>
    *
    * This will be shown in the logcat only in DEBUG mode.
    */
   public static void printStats() {
     if (inspectMode) {
-      //TODO: print gandalf collected stats
+      printGandalfCollectedStats();
     }
-    //TODO: print collected stats
+    printJoinPointStats();
+  }
+
+  private static void printGandalfCollectedStats() {
+    //TODO print gandalf collected stats.
+  }
+
+  private static void printJoinPointStats() {
     Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap =  Aspects.aspectOf(TrackingAspect.class).getStatsMap();
   }
 }
