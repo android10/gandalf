@@ -22,38 +22,38 @@ public class MessageManager {
 
   public void printTracingAspectEnterMessage(GandalfJoinPoint joinPoint) {
     String message = this.messageBuilder.buildTracingAspectEnterMessage(joinPoint);
-    this.printMessage(joinPoint.getClassName(), message);
+    this.printMessage(joinPoint.getClassSimpleName(), message);
   }
 
   public void printTracingAspectExitMessage(GandalfJoinPoint joinPoint, Object returnValue,
       String executionTimeMillis) {
     String message = this.messageBuilder.buildTracingAspectExitMessage(joinPoint, returnValue,
         executionTimeMillis);
-    this.printMessage(joinPoint.getClassName(), message);
+    this.printMessage(joinPoint.getClassSimpleName(), message);
   }
 
   public void printLoggingAspectMessageEverything(GandalfJoinPoint joinPoint, Object returnValue,
       String executionTimeMillis) {
     String message = this.messageBuilder.buildLoggingAspectMessageEverything(joinPoint,
         returnValue, executionTimeMillis);
-    this.printMessage(joinPoint.getClassName(), message);
+    this.printMessage(joinPoint.getClassSimpleName(), message);
   }
 
   public void printLoggingAspectMessageSignature(GandalfJoinPoint joinPoint, Object returnValue) {
     String message = this.messageBuilder.buildLoggingAspectMessageSignature(joinPoint,
         returnValue);
-    this.printMessage(joinPoint.getClassName(), message);
+    this.printMessage(joinPoint.getClassSimpleName(), message);
   }
 
   public void printLoggingAspectMessageThread(GandalfJoinPoint joinPoint) {
     String message = this.messageBuilder.buildLoggingAspectMessageThread(joinPoint);
-    this.printMessage(joinPoint.getClassName(), message);
+    this.printMessage(joinPoint.getClassSimpleName(), message);
   }
 
   public void printLoggingAspectMessageTime(GandalfJoinPoint joinPoint,
       String executionTimeMillis) {
     String message = this.messageBuilder.buildLoggingAspectMessageTime(joinPoint,
         executionTimeMillis);
-    this.printMessage(joinPoint.getClassName(), message);
+    this.printMessage(joinPoint.getClassSimpleName(), message);
   }
 }

@@ -41,8 +41,13 @@ public class DataPresenter {
   }
 
   @Trackable
-  public void anotherMethod() {
+  public void anotherMethodOne() {
     sleep(25);
+  }
+
+  @Trackable
+  public void anotherMethodTwo() {
+    sleep(18);
   }
 
   private void sleep(long millis) {

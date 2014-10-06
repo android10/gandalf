@@ -20,11 +20,14 @@ public class GandalfJoinPoint {
 
   private final JoinPoint joinPoint;
   private final MethodSignature methodSignature;
-  private final String className;
+  private final String classCanonicalName;
+  private final String classSimpleName;
   private final String methodName;
+  private final List<Class> methodParamTypesList;
   private final List<String> methodParamNamesList;
   private final List<Object> methodParamValuesList;
   private final String executionThreadName;
+  private final String joinPointUniqueName;
 
   /**
    * Constructor of the class
@@ -38,15 +41,18 @@ public class GandalfJoinPoint {
 
     this.joinPoint = joinPoint;
     this.methodSignature = (MethodSignature) this.joinPoint.getSignature();
-    this.className = this.methodSignature.getDeclaringType().getSimpleName();
+    this.classCanonicalName = this.methodSignature.getDeclaringType().getCanonicalName();
+    this.classSimpleName = this.methodSignature.getDeclaringType().getSimpleName();
     this.methodName = this.methodSignature.getName();
+    this.methodParamTypesList = Arrays.asList(this.methodSignature.getParameterTypes());
     this.methodParamNamesList = Arrays.asList(this.methodSignature.getParameterNames());
     this.methodParamValuesList = Arrays.asList(this.joinPoint.getArgs());
     this.executionThreadName = Thread.currentThread().getName();
+    this.joinPointUniqueName = this.generateJoinPointUniqueName();
   }
 
-  public String getClassName() {
-    return className;
+  public String getClassSimpleName() {
+    return classSimpleName;
   }
 
   public String getMethodName() {
@@ -100,12 +106,31 @@ public class GandalfJoinPoint {
   }
 
   @Override public boolean equals(Object o) {
-    //TODO:
-    return super.equals(o);
+    return this.joinPointUniqueName.equals(o);
   }
 
   @Override public int hashCode() {
-    //TODO:
-    return super.hashCode();
+    return this.joinPointUniqueName.hashCode();
+  }
+
+  private String generateJoinPointUniqueName() {
+    StringBuilder stringBuilder = new StringBuilder();
+    stringBuilder.append(this.classCanonicalName);
+    stringBuilder.append(".");
+    stringBuilder.append(this.methodName);
+    stringBuilder.append("(");
+    if (this.methodParamNamesList != null && !this.methodParamNamesList.isEmpty()) {
+      for (int i = 0; i < this.methodParamNamesList.size(); i++) {
+        stringBuilder.append(this.methodParamTypesList.get(i).getSimpleName());
+        stringBuilder.append(" ");
+        stringBuilder.append(this.methodParamNamesList.get(i));
+        if ((i != this.methodParamNamesList.size() - 1)) {
+          stringBuilder.append(", ");
+        }
+      }
+    }
+    stringBuilder.append(")");
+
+    return stringBuilder.toString();
   }
 }

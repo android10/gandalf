@@ -32,7 +32,7 @@ public class MessageBuilder {
     message.append(SEPARATOR);
     message.append(METHOD_LABEL);
     message.append(joinPoint.getMethodName());
-    message.append(buildMethodSignature(joinPoint));
+    message.append(buildMethodSignatureWithValues(joinPoint));
     message.append(SEPARATOR);
     message.append(THREAD_LABEL);
     message.append(joinPoint.getExecutionThreadName());
@@ -68,7 +68,7 @@ public class MessageBuilder {
     message.append(LOG_ENCLOSING_OPEN);
     message.append(METHOD_LABEL);
     message.append(joinPoint.getMethodName());
-    message.append(buildMethodSignature(joinPoint));
+    message.append(buildMethodSignatureWithValues(joinPoint));
     message.append(buildMethodReturningValue(returnValue));
     message.append(SEPARATOR);
     message.append(THREAD_LABEL);
@@ -89,7 +89,7 @@ public class MessageBuilder {
     message.append(LOG_ENCLOSING_OPEN);
     message.append(METHOD_LABEL);
     message.append(joinPoint.getMethodName());
-    message.append(buildMethodSignature(joinPoint));
+    message.append(buildMethodSignatureWithValues(joinPoint));
     message.append(buildMethodReturningValue(returnValue));
     message.append(LOG_ENCLOSING_CLOSE);
 
@@ -102,7 +102,7 @@ public class MessageBuilder {
     message.append(LOG_ENCLOSING_OPEN);
     message.append(METHOD_LABEL);
     message.append(joinPoint.getMethodName());
-    message.append(buildMethodSignature(joinPoint));
+    message.append(buildMethodSignatureWithValues(joinPoint));
     message.append(SEPARATOR);
     message.append(THREAD_LABEL);
     message.append(joinPoint.getExecutionThreadName());
@@ -118,7 +118,7 @@ public class MessageBuilder {
     message.append(LOG_ENCLOSING_OPEN);
     message.append(METHOD_LABEL);
     message.append(joinPoint.getMethodName());
-    message.append(buildMethodSignature(joinPoint));
+    message.append(buildMethodSignatureWithValues(joinPoint));
     message.append(SEPARATOR);
     message.append(TIME_LABEL);
     message.append(executionTimeMillis);
@@ -128,7 +128,7 @@ public class MessageBuilder {
     return message.toString();
   }
 
-  private String buildMethodSignature(GandalfJoinPoint joinPoint) {
+  private String buildMethodSignatureWithValues(GandalfJoinPoint joinPoint) {
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("(");
     List<String> methodParamNames = joinPoint.getMethodParamNamesList();
