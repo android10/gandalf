@@ -2,6 +2,7 @@ package com.fernandocejas.android10.gandalf.internal;
 
 import com.fernandocejas.android10.gandalf.Gandalf;
 import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPointStats;
 import java.util.List;
 
 /**
@@ -125,6 +126,11 @@ public class MessageBuilder {
     message.append(TIME_MILLIS);
     message.append(LOG_ENCLOSING_CLOSE);
 
+    return message.toString();
+  }
+
+  protected String buildTrackingAspectMessageStats(GandalfJoinPointStats gandalfJoinPointStats) {
+    StringBuilder message = new StringBuilder(LIBRARY_LABEL);
     return message.toString();
   }
 

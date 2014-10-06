@@ -1,6 +1,8 @@
 package com.fernandocejas.android10.gandalf.internal;
 
 import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
+import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPointStats;
+import java.util.Map;
 
 public class MessageManager {
 
@@ -55,5 +57,15 @@ public class MessageManager {
     String message = this.messageBuilder.buildLoggingAspectMessageTime(joinPoint,
         executionTimeMillis);
     this.printMessage(joinPoint.getClassSimpleName(), message);
+  }
+
+  public void printTrackingAspectStats(Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap) {
+    String message;
+    if (statsMap != null && !statsMap.isEmpty()) {
+      for (GandalfJoinPointStats stats : statsMap.values()) {
+        message = this.messageBuilder.buildTrackingAspectMessageStats(stats);
+        this.printMessage(stats.getGandalfJoinPoint().getClassSimpleName(), message);
+      }
+    }
   }
 }

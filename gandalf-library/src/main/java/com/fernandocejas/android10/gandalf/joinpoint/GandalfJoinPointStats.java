@@ -6,7 +6,7 @@ package com.fernandocejas.android10.gandalf.joinpoint;
 
 public class GandalfJoinPointStats {
 
-  private GandalfJoinPoint gandalfJoinPoint;
+  private final GandalfJoinPoint gandalfJoinPoint;
 
   private int timesExecuted = 0;
   private long totalExecutionTime = 0;
@@ -21,5 +21,17 @@ public class GandalfJoinPointStats {
 
   public synchronized void accumulateExecutionTime(long executionTimeMillis) {
     this.totalExecutionTime+= executionTimeMillis;
+  }
+
+  public synchronized int getJoinPointTimesExecuted() {
+    return this.timesExecuted;
+  }
+
+  public synchronized long getJoinPointTotalExecutionTimeMillis() {
+    return this.totalExecutionTime;
+  }
+
+  public GandalfJoinPoint getGandalfJoinPoint() {
+    return gandalfJoinPoint;
   }
 }
