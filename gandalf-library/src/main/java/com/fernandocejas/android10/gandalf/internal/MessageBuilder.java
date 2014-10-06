@@ -18,10 +18,15 @@ public class MessageBuilder {
   private static final String LOG_ENCLOSING_OPEN = "[";
   private static final String LOG_ENCLOSING_CLOSE = "]";
   private static final String TIME_MILLIS = " ms";
+  private static final String TIME_NUMBER_SINGULAR = " time";
+  private static final String TIME_NUMBER_PLURAL = " times";
 
   private static final String LABEL_ENTERING = "Entering";
   private static final String LABEL_EXITING = "Exiting";
   private static final String LABEL_RETURNING = " returning ";
+
+  private static final String STATS_LABEL_TOTAL_TIMES_EXECUTED = "Executed ";
+  private static final String STATS_LABEL_TOTAL_EXECUTION_TIME = "Total time ";
 
   public MessageBuilder() {}
 
@@ -130,7 +135,26 @@ public class MessageBuilder {
   }
 
   protected String buildTrackingAspectMessageStats(GandalfJoinPointStats gandalfJoinPointStats) {
+
     StringBuilder message = new StringBuilder(LIBRARY_LABEL);
+    message.append(LOG_ENCLOSING_OPEN);
+    message.append(METHOD_LABEL);
+    message.append(gandalfJoinPointStats.getGandalfJoinPoint().getMethodName());
+    message.append(buildMethodSignatureWithValues(gandalfJoinPointStats.getGandalfJoinPoint()));
+    message.append(SEPARATOR);
+    message.append(STATS_LABEL_TOTAL_TIMES_EXECUTED);
+    message.append(String.valueOf(gandalfJoinPointStats.getJoinPointTimesExecuted()));
+    if (gandalfJoinPointStats.getJoinPointTimesExecuted() == 1) {
+      message.append(TIME_NUMBER_SINGULAR);
+    } else {
+      message.append(TIME_NUMBER_PLURAL);
+    }
+    message.append(SEPARATOR);
+    message.append(STATS_LABEL_TOTAL_EXECUTION_TIME);
+    message.append(String.valueOf(gandalfJoinPointStats.getJoinPointTotalExecutionTimeMillis()));
+    message.append(TIME_MILLIS);
+    message.append(LOG_ENCLOSING_CLOSE);
+
     return message.toString();
   }
 

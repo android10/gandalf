@@ -12,7 +12,14 @@ public class GandalfJoinPointStats {
   private long totalExecutionTime = 0;
 
   public GandalfJoinPointStats(GandalfJoinPoint gandalfJoinPoint) {
+    if (gandalfJoinPoint == null) {
+      throw new IllegalArgumentException("Constructor parameters cannot be null!!!");
+    }
     this.gandalfJoinPoint = gandalfJoinPoint;
+  }
+
+  public GandalfJoinPoint getGandalfJoinPoint() {
+    return gandalfJoinPoint;
   }
 
   public synchronized void incrementTimesExecuted() {
@@ -29,9 +36,5 @@ public class GandalfJoinPointStats {
 
   public synchronized long getJoinPointTotalExecutionTimeMillis() {
     return this.totalExecutionTime;
-  }
-
-  public GandalfJoinPoint getGandalfJoinPoint() {
-    return gandalfJoinPoint;
   }
 }

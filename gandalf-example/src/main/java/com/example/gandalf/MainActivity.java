@@ -2,6 +2,7 @@ package com.example.gandalf;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.fernandocejas.android10.gandalf.Gandalf;
 
 public class MainActivity extends Activity {
 
@@ -28,5 +29,10 @@ public class MainActivity extends Activity {
     dataPresenterTwo.anotherMethodTwo();
 
     dataPresenterOne.printMessage("this is tag", "this is message");
+  }
+
+  @Override protected void onDestroy() {
+    super.onDestroy();
+    Gandalf.printStats();
   }
 }

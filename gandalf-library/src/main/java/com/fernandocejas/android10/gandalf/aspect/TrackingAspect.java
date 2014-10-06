@@ -26,7 +26,7 @@ public class TrackingAspect {
   private static final String POINTCUT_CONSTRUCTOR =
       "execution(@com.fernandocejas.android10.gandalf.annotation.Trackable *.new(..))";
 
-  private Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap =
+  private final Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap =
       new ConcurrentHashMap<GandalfJoinPoint, GandalfJoinPointStats>();
 
   @Pointcut(POINTCUT_METHOD)
