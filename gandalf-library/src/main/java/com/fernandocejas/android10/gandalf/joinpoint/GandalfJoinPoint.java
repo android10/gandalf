@@ -105,8 +105,13 @@ public class GandalfJoinPoint {
         && ((MethodSignature) signature).getReturnType() != void.class);
   }
 
-  @Override public boolean equals(Object o) {
-    return this.joinPointUniqueName.equals(o);
+  @Override public boolean equals(Object object) {
+    if (object == this) { return true; }
+
+    if ((object == null) || (object.getClass() != this.getClass())) { return false; }
+
+    GandalfJoinPoint joinPoint = (GandalfJoinPoint) object;
+    return this.joinPointUniqueName.equals(joinPoint.joinPointUniqueName);
   }
 
   @Override public int hashCode() {
