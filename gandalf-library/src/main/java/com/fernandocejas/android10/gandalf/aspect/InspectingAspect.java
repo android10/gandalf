@@ -4,8 +4,6 @@
  */
 package com.fernandocejas.android10.gandalf.aspect;
 
-import com.fernandocejas.android10.gandalf.internal.DebugLog;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.DeclarePrecedence;
@@ -15,33 +13,34 @@ import org.aspectj.lang.annotation.Pointcut;
 @DeclarePrecedence("com.fernandocejas.android10.gandalf.aspect.TrackingAspect")
 public class InspectingAspect {
 
-  private static final String POINTCUT_APPLICATION_CREATE =
-      "execution(void *android.app.Application+.*onCreate(..))";
-
-  private static final String POINTCUT_APPLICATION_DESTROY =
-      "execution(void *android.app.Application+.*onTerminate(..))";
-
   private static final String POINTCUT_ACTIVITY_CREATE =
       "execution(void *android.app.Activity+.*onCreate(..))";
 
-  private static final String POINTCUT_ACTIVITY_DESTROY =
-      "execution(void *android.app.Activity+.*onDestroy(..))";
+  private static final String POINTCUT_FRAGMENT_CREATE =
+      "execution(void *android.app.Fragment+.*onCreate(..))";
 
-  public InspectingAspect() {}
+  private static final String POINTCUT_FRAGMENT_SUPPORT_CREATE =
+      "execution(void *android.support.v4.app.Fragment+.*onCreate(..))";
 
-  @Pointcut(POINTCUT_APPLICATION_CREATE)
-  public void onApplicationCreated() {}
+  private int activitiesCreated = 0;
+  private int fragmentsCreated = 0;
 
-  @Pointcut(POINTCUT_APPLICATION_DESTROY)
-  public void onApplicationDestroyed() {}
+  @Pointcut(POINTCUT_ACTIVITY_CREATE)
+  public void onActivityCreated(){}
 
-  @After("onApplicationCreated()")
-  public void weaveAfterApplicationCreated(JoinPoint joinPoint) {
-    new DebugLog().log("Stats---->", "Penano----> onApplicationCreated!!!");
+  @Pointcut(POINTCUT_FRAGMENT_CREATE)
+  public void onFragmentCreated(){}
+
+  @Pointcut(POINTCUT_FRAGMENT_SUPPORT_CREATE)
+  public void onFragmentSupportCreated(){}
+
+  @After("onActivityCreated()")
+  public void afterActivityCreated() {
+    this.activitiesCreated++;
   }
 
-  @After("onApplicationDestroyed()")
-  public void weaveAfterApplicationDestroyed(JoinPoint joinPoint) {
-    new DebugLog().log("Stats---->", "Penano----> onApplicationTerminated!!!");
+  @After("onFragmentCreated() || onFragmentSupportCreated()")
+  public void afterFragmentCreated() {
+    this.fragmentsCreated++;
   }
 }
