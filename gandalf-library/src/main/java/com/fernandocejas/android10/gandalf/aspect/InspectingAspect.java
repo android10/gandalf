@@ -22,8 +22,12 @@ public class InspectingAspect {
   private static final String POINTCUT_FRAGMENT_SUPPORT_CREATE =
       "execution(void *android.support.v4.app.Fragment+.*onCreate(..))";
 
+  private static final String POINTCUT_SERVICE_CREATE =
+      "execution(void *android.app.Service+.*onCreate(..))";
+
   private int activitiesCreated = 0;
   private int fragmentsCreated = 0;
+  private int servicesCreated = 0;
 
   @Pointcut(POINTCUT_ACTIVITY_CREATE)
   public void onActivityCreated(){}
@@ -34,6 +38,9 @@ public class InspectingAspect {
   @Pointcut(POINTCUT_FRAGMENT_SUPPORT_CREATE)
   public void onFragmentSupportCreated(){}
 
+  @Pointcut(POINTCUT_SERVICE_CREATE)
+  public void onServiceCreated(){}
+
   @After("onActivityCreated()")
   public void afterActivityCreated() {
     this.activitiesCreated++;
@@ -42,5 +49,10 @@ public class InspectingAspect {
   @After("onFragmentCreated() || onFragmentSupportCreated()")
   public void afterFragmentCreated() {
     this.fragmentsCreated++;
+  }
+
+  @After("onServiceCreated()")
+  public void afterServiceCreated() {
+    this.servicesCreated++;
   }
 }
