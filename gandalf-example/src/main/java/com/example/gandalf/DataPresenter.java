@@ -4,9 +4,13 @@
  */
 package com.example.gandalf;
 
-import com.fernandocejas.android10.gandalf.annotation.Trackable;
 import com.fernandocejas.android10.gandalf.annotation.Loggable;
+import com.fernandocejas.android10.gandalf.annotation.StrictModeDebug;
 import com.fernandocejas.android10.gandalf.annotation.Traceable;
+import com.fernandocejas.android10.gandalf.annotation.Trackable;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.EVERYTHING;
 import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.SIGNATURE;
@@ -55,6 +59,20 @@ public class DataPresenter {
       Thread.sleep(millis);
     } catch (InterruptedException e) {
       e.printStackTrace();
+    }
+  }
+
+  @StrictModeDebug
+  public void executeDiskIOTaskOnUiThread() {
+    try {
+      File file = File.createTempFile("test", ".txt");
+      FileWriter writer = new FileWriter(file);
+      writer.write("This is fernando julian cejas testing something");
+      writer.close();
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    } finally {
     }
   }
 }
