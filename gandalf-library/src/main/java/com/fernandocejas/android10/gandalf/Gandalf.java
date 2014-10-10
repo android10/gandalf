@@ -4,6 +4,7 @@
  */
 package com.fernandocejas.android10.gandalf;
 
+import com.fernandocejas.android10.gandalf.aspect.InspectingAspect;
 import com.fernandocejas.android10.gandalf.aspect.TrackingAspect;
 import com.fernandocejas.android10.gandalf.internal.MessageManager;
 import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
@@ -56,7 +57,7 @@ public final class Gandalf {
 
   /**
    * Print both stats collected by annotation
-   * {@link com.fernandocejas.android10.gandalf.annotation.Trackable} and Gandalf collected
+   * {@link com.fernandocejas.android10.gandalf.annotation.GTrack} and Gandalf collected
    * stats if Inspection Mode is enable via method {@link #enableInspectionMode()}.<br>
    *
    * This will be shown in the logcat only in DEBUG mode.
@@ -69,7 +70,12 @@ public final class Gandalf {
   }
 
   private static void printGandalfCollectedStats() {
-    //TODO print gandalf collected stats.
+    int activitiesCreated = Aspects.aspectOf(InspectingAspect.class).getActivitiesCreated();
+    int fragmentsCreated = Aspects.aspectOf(InspectingAspect.class).getFragmentsCreated();
+    int servicesCreated = Aspects.aspectOf(InspectingAspect.class).getServicesCreated();
+
+    new MessageManager().printInspectingAspectStats(activitiesCreated, fragmentsCreated,
+        servicesCreated);
   }
 
   private static void printTrackableStats() {

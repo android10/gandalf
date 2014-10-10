@@ -19,10 +19,10 @@ import org.aspectj.lang.annotation.Pointcut;
 public class TracingAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Traceable * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GTrace * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Traceable *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GTrace *.new(..))";
 
   private final MessageManager messageManager;
 
@@ -35,12 +35,12 @@ public class TracingAspect {
   }
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithTraceable() {}
+  public void methodAnnotatedWithGTrace() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedWithTraceable() {}
+  public void constructorAnnotatedWithGTrace() {}
 
-  @Around("methodAnnotatedWithTraceable() || constructorAnnotatedWithTraceable()")
+  @Around("methodAnnotatedWithGTrace() || constructorAnnotatedWithGTrace()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
 
     GandalfJoinPoint gandalfJoinPoint = new GandalfJoinPoint(joinPoint);

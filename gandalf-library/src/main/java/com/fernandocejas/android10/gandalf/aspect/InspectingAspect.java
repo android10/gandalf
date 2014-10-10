@@ -55,4 +55,16 @@ public class InspectingAspect {
   public void afterServiceCreated() {
     this.servicesCreated++;
   }
+
+  public int getActivitiesCreated() {
+    return activitiesCreated;
+  }
+
+  public int getFragmentsCreated() {
+    return fragmentsCreated;
+  }
+
+  public int getServicesCreated() {
+    return servicesCreated;
+  }
 }

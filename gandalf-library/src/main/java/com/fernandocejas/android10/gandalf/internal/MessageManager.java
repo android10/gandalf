@@ -68,4 +68,23 @@ public class MessageManager {
       }
     }
   }
+
+  public void printInspectingAspectStats(int activitiesCreated, int fragmentsCreated,
+      int servicesCreated) {
+    if (activitiesCreated > 0) {
+      String message = this.messageBuilder.buildInspectingAspectStatsMessage(
+          MessageBuilder.GANDALF_STATS_MESSAGE_ACTIVITIES_CREATED, activitiesCreated);
+      this.printMessage(MessageBuilder.GANDALF_STATS_MESSAGE_TAG, message);
+    }
+    if (fragmentsCreated > 0) {
+      String message = this.messageBuilder.buildInspectingAspectStatsMessage(
+          MessageBuilder.GANDALF_STATS_MESSAGE_FRAGMENTS_CREATED, fragmentsCreated);
+      this.printMessage(MessageBuilder.GANDALF_STATS_MESSAGE_TAG, message);
+    }
+    if (servicesCreated > 0) {
+      String message = this.messageBuilder.buildInspectingAspectStatsMessage(
+          MessageBuilder.GANDALF_STATS_MESSAGE_SERVICES_CREATED, servicesCreated);
+      this.printMessage(MessageBuilder.GANDALF_STATS_MESSAGE_TAG, message);
+    }
+  }
 }

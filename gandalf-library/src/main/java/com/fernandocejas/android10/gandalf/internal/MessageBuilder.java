@@ -13,6 +13,7 @@ public class MessageBuilder {
   private static final String LIBRARY_LABEL = Gandalf.class.getSimpleName() + " => ";
   private static final String METHOD_LABEL = "@Method -> ";
   private static final String THREAD_LABEL = "@Thread -> ";
+  private static final String STATS_LABEL = "@Stats -> ";
   private static final String TIME_LABEL = "@Time -> ";
   private static final String SEPARATOR = " :: ";
   private static final String LOG_ENCLOSING_OPEN = "[";
@@ -27,6 +28,11 @@ public class MessageBuilder {
 
   private static final String STATS_LABEL_TOTAL_TIMES_EXECUTED = "Executed ";
   private static final String STATS_LABEL_TOTAL_EXECUTION_TIME = "Total time ";
+
+  protected static final String GANDALF_STATS_MESSAGE_TAG = "GandalfStats";
+  protected static final String GANDALF_STATS_MESSAGE_ACTIVITIES_CREATED = "Activities created: ";
+  protected static final String GANDALF_STATS_MESSAGE_FRAGMENTS_CREATED = "Fragments created: ";
+  protected static final String GANDALF_STATS_MESSAGE_SERVICES_CREATED = "Services created: ";
 
   public MessageBuilder() {}
 
@@ -158,7 +164,20 @@ public class MessageBuilder {
     return message.toString();
   }
 
+  protected String buildInspectingAspectStatsMessage(String statsLabel, int statsValue) {
+
+    StringBuilder message = new StringBuilder(LIBRARY_LABEL);
+    message.append(LOG_ENCLOSING_OPEN);
+    message.append(STATS_LABEL);
+    message.append(statsLabel);
+    message.append(String.valueOf(statsValue));
+    message.append(LOG_ENCLOSING_CLOSE);
+
+    return message.toString();
+  }
+
   private String buildMethodSignatureWithValues(GandalfJoinPoint joinPoint) {
+
     StringBuilder stringBuilder = new StringBuilder();
     stringBuilder.append("(");
     List<String> methodParamNames = joinPoint.getMethodParamNamesList();

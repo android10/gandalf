@@ -6,8 +6,8 @@ package com.example.gandalf;
 
 import com.fernandocejas.android10.gandalf.annotation.GLog;
 import com.fernandocejas.android10.gandalf.annotation.GStrictMode;
-import com.fernandocejas.android10.gandalf.annotation.Traceable;
-import com.fernandocejas.android10.gandalf.annotation.Trackable;
+import com.fernandocejas.android10.gandalf.annotation.GTrace;
+import com.fernandocejas.android10.gandalf.annotation.GTrack;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,17 +39,17 @@ public class DataPresenter {
     sleep(5);
   }
 
-  @Traceable
+  @GTrace
   public void printMessage(String tag, String message) {
     sleep(10);
   }
 
-  @Trackable
+  @GTrack
   public void anotherMethodOne() {
     sleep(25);
   }
 
-  @Trackable
+  @GTrack
   public void anotherMethodTwo() {
     sleep(18);
   }

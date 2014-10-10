@@ -21,21 +21,21 @@ import org.aspectj.lang.annotation.Pointcut;
 public class TrackingAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Trackable * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GTrack * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Trackable *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GTrack *.new(..))";
 
   private final Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap =
       new ConcurrentHashMap<GandalfJoinPoint, GandalfJoinPointStats>();
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithTrackable() {}
+  public void methodAnnotatedWithGTrack() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedWithTrackable() {}
+  public void constructorAnnotatedWithGTrack() {}
 
-  @Around("methodAnnotatedWithTrackable() || constructorAnnotatedWithTrackable()")
+  @Around("methodAnnotatedWithGTrack() || constructorAnnotatedWithGTrack()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();

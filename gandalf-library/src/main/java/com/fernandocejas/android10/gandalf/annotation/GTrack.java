@@ -34,4 +34,4 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  */
 @Retention(CLASS)
 @Target({CONSTRUCTOR, METHOD })
-public @interface Trackable {}
+public @interface GTrack {}
