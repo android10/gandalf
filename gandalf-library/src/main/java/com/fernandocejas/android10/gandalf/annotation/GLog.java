@@ -7,35 +7,35 @@ package com.fernandocejas.android10.gandalf.annotation;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.EVERYTHING;
+import static com.fernandocejas.android10.gandalf.annotation.GLog.LogScope.EVERYTHING;
 import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * <br>Simple logging aspect that indicates that the annotated method is being logged (application debug
- * type only) and will print:<br>
+ * <br>Gandalf logging aspect that indicates that the annotated method/constructor will print the
+ * following information on the android logcat:<br>
  *
  * <br>- Method signature with parameter values.
  * <br>- Current execution thread.
  * <br>- Total execution time.
  *
- * <br><br>A {@link LoggingLevel} option can be passed to choose different logging level information.
+ * <br><br>A {@link LogScope} option can be passed to choose different logging scopes.
  *
- * <br>Example of the output logging everything using {@link LoggingLevel#EVERYTHING}
+ * <br>Example of the output logging everything using {@link LogScope#EVERYTHING}
  * will be:<br>
  *
  * <br>Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]
  */
 @Retention(RUNTIME)
 @Target({ CONSTRUCTOR, METHOD })
-public @interface Loggable {
-  public LoggingLevel value() default EVERYTHING;
+public @interface GLog {
+  public LogScope value() default EVERYTHING;
 
   /**
    * Logging scope of the current method/constructor annotated.
    */
-  public enum LoggingLevel {
+  public enum LogScope {
     /** Will log method signature with parameter values, execution time and execution thread. */
     EVERYTHING,
 

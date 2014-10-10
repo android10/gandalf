@@ -13,4 +13,4 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
 
 @Retention(CLASS)
 @Target({ CONSTRUCTOR, METHOD })
-public @interface StrictModeDebug {}
+public @interface GStrictMode {}

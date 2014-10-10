@@ -13,19 +13,19 @@ import org.aspectj.lang.annotation.Pointcut;
 public class StrictModeAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.StrictModeDebug * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GStrictMode * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.StrictModeDebug *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GStrictMode *.new(..))";
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithStrictModeDebug() {}
+  public void methodAnnotatedWithGStrictMode() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedWithStrictModeDebug() {}
+  public void constructorAnnotatedWithGStrictMode() {}
 
-  @Before("methodAnnotatedWithStrictModeDebug() || constructorAnnotatedWithStrictModeDebug()")
-  public void weaveBeforeJoinPoint() throws Throwable {
+  @Before("methodAnnotatedWithGStrictMode() || constructorAnnotatedWithGStrictMode()")
+  public void weaveBeforeJoinPoint() {
     StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
         .detectAll()
         .penaltyLog()

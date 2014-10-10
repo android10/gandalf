@@ -45,6 +45,9 @@ public class MainActivity extends Activity {
 
   @Override protected void onDestroy() {
     super.onDestroy();
+
+    //dataPresenterOne.executeDiskIOTaskOnUiThread();
+
     Gandalf.printStats();
   }
 

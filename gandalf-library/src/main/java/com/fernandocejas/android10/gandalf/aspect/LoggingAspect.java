@@ -4,7 +4,7 @@
  */
 package com.fernandocejas.android10.gandalf.aspect;
 
-import com.fernandocejas.android10.gandalf.annotation.Loggable;
+import com.fernandocejas.android10.gandalf.annotation.GLog;
 import com.fernandocejas.android10.gandalf.internal.MessageManager;
 import com.fernandocejas.android10.gandalf.internal.StopWatch;
 import com.fernandocejas.android10.gandalf.joinpoint.GandalfJoinPoint;
@@ -21,10 +21,10 @@ import org.aspectj.lang.annotation.Pointcut;
 public class LoggingAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Loggable * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GLog * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.Loggable *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GLog *.new(..))";
 
   private final MessageManager messageManager;
 
@@ -37,12 +37,12 @@ public class LoggingAspect {
   }
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithLoggable() {}
+  public void methodAnnotatedWithGLog() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedWithLoggable() {}
+  public void constructorAnnotatedWithGLog() {}
 
-  @Around("methodAnnotatedWithLoggable() || constructorAnnotatedWithLoggable()")
+  @Around("methodAnnotatedWithGLog() || constructorAnnotatedWithGLog()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
 
     GandalfJoinPoint gandalfJoinPoint = new GandalfJoinPoint(joinPoint);
@@ -52,9 +52,9 @@ public class LoggingAspect {
     Object result = joinPoint.proceed();
     stopWatch.stop();
 
-    Annotation annotation = gandalfJoinPoint.getAnnotation(Loggable.class);
+    Annotation annotation = gandalfJoinPoint.getAnnotation(GLog.class);
     if (annotation != null) {
-      switch (((Loggable) annotation).value()) {
+      switch (((GLog) annotation).value()) {
         case SIGNATURE:
           this.messageManager.printLoggingAspectMessageSignature(gandalfJoinPoint, result);
           break;

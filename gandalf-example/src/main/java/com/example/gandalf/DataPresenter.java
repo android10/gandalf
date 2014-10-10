@@ -4,37 +4,37 @@
  */
 package com.example.gandalf;
 
-import com.fernandocejas.android10.gandalf.annotation.Loggable;
-import com.fernandocejas.android10.gandalf.annotation.StrictModeDebug;
+import com.fernandocejas.android10.gandalf.annotation.GLog;
+import com.fernandocejas.android10.gandalf.annotation.GStrictMode;
 import com.fernandocejas.android10.gandalf.annotation.Traceable;
 import com.fernandocejas.android10.gandalf.annotation.Trackable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.EVERYTHING;
-import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.SIGNATURE;
-import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.THREAD;
-import static com.fernandocejas.android10.gandalf.annotation.Loggable.LoggingLevel.TIME;
+import static com.fernandocejas.android10.gandalf.annotation.GLog.LogScope.EVERYTHING;
+import static com.fernandocejas.android10.gandalf.annotation.GLog.LogScope.SIGNATURE;
+import static com.fernandocejas.android10.gandalf.annotation.GLog.LogScope.THREAD;
+import static com.fernandocejas.android10.gandalf.annotation.GLog.LogScope.TIME;
 
 public class DataPresenter {
 
-  @Loggable(EVERYTHING)
+  @GLog(EVERYTHING)
   public void getData() {
     sleep(5);
   }
 
-  @Loggable(TIME)
+  @GLog(TIME)
   public void getData(String name) {
     sleep(5);
   }
 
-  @Loggable(SIGNATURE)
+  @GLog(SIGNATURE)
   public void getData(String name, int quantity) {
     sleep(5);
   }
 
-  @Loggable(THREAD)
+  @GLog(THREAD)
   public void getData(String name, int quantity, int count) {
     sleep(5);
   }
@@ -62,7 +62,7 @@ public class DataPresenter {
     }
   }
 
-  @StrictModeDebug
+  @GStrictMode
   public void executeDiskIOTaskOnUiThread() {
     try {
       File file = File.createTempFile("test", ".txt");
