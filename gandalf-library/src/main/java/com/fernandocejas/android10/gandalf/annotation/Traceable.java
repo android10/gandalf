@@ -12,15 +12,19 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
- * <br>Simple tracing aspect annotation that prints a debug message at both entering and exiting
- * method, plus method parameter and execution thread. Useful to increase the visibility of the
- * internal workings of a program.<br>
+ * <br>Gandalf tracing aspect annotation that prints a debug message at both when entering and
+ * exiting from a method/constructor. It also adds method parameters (with values) and execution
+ * thread. Useful to increase the visibility of the internal workings of a program.<br>
  *
- * <br>Example of what will be shown in the logcat when using this annotation
- * (only debug version type of the app):<br>
+ * <br>OUTPUT EXAMPLE:<br>
  *
  * <br>Gandalf => [Entering :: @Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread]<br>
  * <br>Gandalf => [Exiting :: @Method -> yourMethod() :: @Time -> 5 ms]<br>
+ *
+ * <br>------------------------------------------------------------------------------------------
+ * <br>"Be on your guard. There are older and fouler things than Orcs in the deep places of the
+ * world." -Gandalf
+ * <br>------------------------------------------------------------------------------------------
  */
 @Retention(CLASS)
 @Target({ CONSTRUCTOR, METHOD})

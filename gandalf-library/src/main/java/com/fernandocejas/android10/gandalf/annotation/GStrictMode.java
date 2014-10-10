@@ -27,7 +27,7 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  *
  * <br>------------------------------------------------------------------------------------------
  * <br>"There is only one Lord of the Ring, only one who can bend it to his will. And he does not
- * share power." -Gandalf The Grey
+ * share power." -Gandalf
  * <br>------------------------------------------------------------------------------------------
  */
 @Retention(CLASS)

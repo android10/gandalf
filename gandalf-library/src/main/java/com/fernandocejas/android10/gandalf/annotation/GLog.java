@@ -28,7 +28,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <br>Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]<br>
  *
  * <br>------------------------------------------------------------------------------------------
- * <br>"The Ring has awoken, it’s heard its masters call." -Gandalf The White
+ * <br>"The Ring has awoken, it’s heard its masters call." -Gandalf
  * <br>------------------------------------------------------------------------------------------
  */
 @Retention(RUNTIME)
