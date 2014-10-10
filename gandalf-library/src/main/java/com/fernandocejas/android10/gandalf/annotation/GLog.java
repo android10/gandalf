@@ -25,7 +25,11 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <br>Example of the output logging everything using {@link LogScope#EVERYTHING}
  * will be:<br>
  *
- * <br>Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]
+ * <br>Gandalf => [@Method -> yourMethod(param1="Tony", param2="Stark") :: @Thread -> MainThread :: @Time -> 5 ms]<br>
+ *
+ * <br>------------------------------------------------------------------------------------------
+ * <br>"The Ring has awoken, it’s heard its masters call." -Gandalf The White
+ * <br>------------------------------------------------------------------------------------------
  */
 @Retention(RUNTIME)
 @Target({ CONSTRUCTOR, METHOD })

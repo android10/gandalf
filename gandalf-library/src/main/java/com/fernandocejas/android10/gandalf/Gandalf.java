@@ -23,7 +23,12 @@ import org.aspectj.lang.Aspects;
  *
  * <br>REMEMBER: it is not necessary to remove Gandalf code or annotations, even if you are
  * building a release version of the app, cause nothing will be shown in production or release
- * mode.
+ * mode.<br>
+ *
+ * <br>------------------------------------------------------------------------------------------
+ * <br>"Keep well the Lord of the Mark, till I return. Await me at Helm's Gate. Farewell!"
+ * –Gandalf to Aragorn and Éomer and the men of the king's household.
+ * <br>------------------------------------------------------------------------------------------
  */
 public final class Gandalf {
 

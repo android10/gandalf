@@ -23,7 +23,12 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  * <br>FOR EXAMPLE: It is a good practice to annotate
  * {@link android.app.Activity#onCreate(android.os.Bundle)} method of your main activity or
  * {@link android.app.Application#onCreate()} method of your {@link android.app.Application} class
- * so the violations can be detected as they happen along the execution of your app.
+ * so the violations can be detected as they happen along the execution of your app.<br>
+ *
+ * <br>------------------------------------------------------------------------------------------
+ * <br>"There is only one Lord of the Ring, only one who can bend it to his will. And he does not
+ * share power." -Gandalf The Grey
+ * <br>------------------------------------------------------------------------------------------
  */
 @Retention(CLASS)
 @Target({ CONSTRUCTOR, METHOD })
