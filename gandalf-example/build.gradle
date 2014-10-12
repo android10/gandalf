@@ -41,6 +41,9 @@ android {
   signingConfigs {
     release {
       storeFile file("../distribution/release.keystore")
+      storePassword "android10"
+      keyAlias "android10"
+      keyPassword "android10"
     }
   }
 
@@ -48,14 +51,21 @@ android {
     debug {
       runProguard false
       applicationIdSuffix ".debug"
+      versionNameSuffix "-debug"
     }
     release {
       signingConfig signingConfigs.release
       runProguard false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      applicationIdSuffix ".release"
     }
   }
+}
+
+def runTasks = gradle.startParameter.taskNames
+if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
+  android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
+  android.signingConfigs.release.keyAlias = System.console().readPassword('Alias Name: ')
+  android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
 }
 
 dependencies {
@@ -104,11 +114,4 @@ variants.all { variant ->
       }
     }
   }
-}
-
-def runTasks = gradle.startParameter.taskNames
-if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
-  android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
-  android.signingConfigs.release.keyAlias = System.console().readPassword('Alias Name: ')
-  android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
 }
