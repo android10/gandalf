@@ -40,10 +40,10 @@ android {
 
   signingConfigs {
     release {
-      storeFile file("../distribution/release.keystore")
-      storePassword "android10"
-      keyAlias "android10"
-      keyPassword "android10"
+      //storeFile file("../distribution/release.keystore")
+      //storePassword "android10"
+      //keyAlias "android10"
+      //keyPassword "android10"
     }
   }
 
@@ -54,19 +54,19 @@ android {
       versionNameSuffix "-debug"
     }
     release {
-      signingConfig signingConfigs.release
+      //signingConfig signingConfigs.release
       runProguard false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
 }
 
-def runTasks = gradle.startParameter.taskNames
-if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
-  android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
-  android.signingConfigs.release.keyAlias = System.console().readPassword('Alias Name: ')
-  android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
-}
+//def runTasks = gradle.startParameter.taskNames
+//if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
+//  android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
+//  android.signingConfigs.release.keyAlias = System.console().readPassword('Alias Name: ')
+//  android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
+//}
 
 dependencies {
   compile project(':gandalf-library')
