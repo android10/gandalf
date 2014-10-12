@@ -38,10 +38,22 @@ android {
     disable 'InvalidPackage' // Some libraries have issues with this
   }
 
-  buildTypes {
+  signingConfigs {
     release {
+      storeFile file("../distribution/release.keystore")
+    }
+  }
+
+  buildTypes {
+    debug {
+      runProguard false
+      applicationIdSuffix ".debug"
+    }
+    release {
+      signingConfig signingConfigs.release
       runProguard false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      applicationIdSuffix ".release"
     }
   }
 }
@@ -92,4 +104,11 @@ variants.all { variant ->
       }
     }
   }
+}
+
+def runTasks = gradle.startParameter.taskNames
+if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
+  android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
+  android.signingConfigs.release.keyAlias = System.console().readPassword('Alias Name: ')
+  android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
 }

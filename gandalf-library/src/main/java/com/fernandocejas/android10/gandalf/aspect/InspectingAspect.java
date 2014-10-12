@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.DeclarePrecedence;
 import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect
-@DeclarePrecedence("com.fernandocejas.android10.gandalf.aspect.TrackingAspect")
+@DeclarePrecedence("com.fernandocejas.android10.gandalf.aspect.WatchingAspect")
 public class InspectingAspect {
 
   private static final String POINTCUT_ACTIVITY_CREATE =

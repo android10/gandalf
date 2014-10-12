@@ -7,7 +7,7 @@ package com.example.gandalf;
 import com.fernandocejas.android10.gandalf.annotation.GLog;
 import com.fernandocejas.android10.gandalf.annotation.GStrictMode;
 import com.fernandocejas.android10.gandalf.annotation.GTrace;
-import com.fernandocejas.android10.gandalf.annotation.GTrack;
+import com.fernandocejas.android10.gandalf.annotation.GWatch;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,12 +44,12 @@ public class DataPresenter {
     sleep(10);
   }
 
-  @GTrack
+  @GWatch
   public void anotherMethodOne() {
     sleep(25);
   }
 
-  @GTrack
+  @GWatch
   public void anotherMethodTwo() {
     sleep(18);
   }

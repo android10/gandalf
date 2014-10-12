@@ -59,11 +59,11 @@ public class MessageManager {
     this.printMessage(joinPoint.getClassSimpleName(), message);
   }
 
-  public void printTrackingAspectStats(Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap) {
+  public void printWatchingAspectStats(Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap) {
     String message;
     if (statsMap != null && !statsMap.isEmpty()) {
       for (GandalfJoinPointStats stats : statsMap.values()) {
-        message = this.messageBuilder.buildTrackingAspectMessageStats(stats);
+        message = this.messageBuilder.buildWatchingAspectMessageStats(stats);
         this.printMessage(stats.getGandalfJoinPoint().getClassSimpleName(), message);
       }
     }

@@ -140,7 +140,7 @@ public class MessageBuilder {
     return message.toString();
   }
 
-  protected String buildTrackingAspectMessageStats(GandalfJoinPointStats gandalfJoinPointStats) {
+  protected String buildWatchingAspectMessageStats(GandalfJoinPointStats gandalfJoinPointStats) {
 
     StringBuilder message = new StringBuilder(LIBRARY_LABEL);
     message.append(LOG_ENCLOSING_OPEN);

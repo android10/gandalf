@@ -12,7 +12,7 @@ import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 /**
- * <br>Gandalf tracking aspect that indicates the annotated method/constructor will collect
+ * <br>Gandalf watching aspect that indicates the annotated method/constructor will collect
  * stats like:<br>
  *
  * <br>- Number of times executed.
@@ -34,4 +34,4 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  */
 @Retention(CLASS)
 @Target({CONSTRUCTOR, METHOD })
-public @interface GTrack {}
+public @interface GWatch {}

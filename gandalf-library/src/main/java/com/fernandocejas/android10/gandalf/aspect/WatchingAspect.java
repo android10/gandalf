@@ -18,24 +18,24 @@ import org.aspectj.lang.annotation.Pointcut;
  * Aspect representing the cross cutting-concern: Stats tracking.
  */
 @Aspect
-public class TrackingAspect {
+public class WatchingAspect {
 
   private static final String POINTCUT_METHOD =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.GTrack * *(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GWatch * *(..))";
 
   private static final String POINTCUT_CONSTRUCTOR =
-      "execution(@com.fernandocejas.android10.gandalf.annotation.GTrack *.new(..))";
+      "execution(@com.fernandocejas.android10.gandalf.annotation.GWatch *.new(..))";
 
   private final Map<GandalfJoinPoint, GandalfJoinPointStats> statsMap =
       new ConcurrentHashMap<GandalfJoinPoint, GandalfJoinPointStats>();
 
   @Pointcut(POINTCUT_METHOD)
-  public void methodAnnotatedWithGTrack() {}
+  public void methodAnnotatedWithGWatch() {}
 
   @Pointcut(POINTCUT_CONSTRUCTOR)
-  public void constructorAnnotatedWithGTrack() {}
+  public void constructorAnnotatedWithGWatch() {}
 
-  @Around("methodAnnotatedWithGTrack() || constructorAnnotatedWithGTrack()")
+  @Around("methodAnnotatedWithGWatch() || constructorAnnotatedWithGWatch()")
   public Object weaveAroundJoinPoint(ProceedingJoinPoint joinPoint) throws Throwable {
     final StopWatch stopWatch = new StopWatch();
     stopWatch.start();
