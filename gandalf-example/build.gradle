@@ -80,7 +80,7 @@ gradle.taskGraph.whenReady { taskGraph ->
       keyPassword = console.readPassword("Key Password: ")
     } else {
       new SwingBuilder().edt {
-        dialog(modal: true, title: "Signing Android Release APK", alwaysOnTop: true,
+        dialog(modal: true, title: "Sign APK", alwaysOnTop: true,
             resizable: false, locationRelativeTo: null, pack: true, show: true) {
           vbox {
             label(text: "Key Store Password: ")
