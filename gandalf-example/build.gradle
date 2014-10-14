@@ -1,3 +1,4 @@
+import groovy.swing.SwingBuilder
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
@@ -40,10 +41,10 @@ android {
 
   signingConfigs {
     release {
-      //storeFile file("../distribution/release.keystore")
-      //storePassword "android10"
-      //keyAlias "android10"
-      //keyPassword "android10"
+      storeFile file("../distribution/android10.keystore")
+      storePassword = ""
+      keyAlias = ""
+      keyPassword = ""
     }
   }
 
@@ -54,19 +55,66 @@ android {
       versionNameSuffix "-debug"
     }
     release {
-      //signingConfig signingConfigs.release
+      signingConfig signingConfigs.release
       runProguard false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      zipAlign true
     }
   }
 }
 
-//def runTasks = gradle.startParameter.taskNames
-//if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
-//  android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
-//  android.signingConfigs.release.keyAlias = System.console().readPassword('Alias Name: ')
-//  android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
-//}
+gradle.taskGraph.whenReady { taskGraph ->
+  if (taskGraph.hasTask(assembleRelease)) {
+    Console console = System.console()
+    def storePassword = ""
+    def keyAlias = ""
+    def keyPassword = ""
+
+    if (console != null) {
+      console.printf "\n----------------------------"
+      console.printf "\nSigning Android Release APK"
+      console.printf "\n----------------------------"
+
+      storePassword = console.readPassword("\nKey Store Password: ")
+      keyAlias = console.readPassword("Key Alias: ")
+      keyPassword = console.readPassword("Key Password: ")
+    } else {
+      new SwingBuilder().edt {
+        dialog(modal: true, title: "Signing Android Release APK", alwaysOnTop: true,
+            resizable: false, locationRelativeTo: null, pack: true, show: true) {
+          vbox {
+            label(text: "Key Store Password: ")
+            inputStorePassword = passwordField()
+            label(text: "Key Alias: ")
+            inputKeyAlias = passwordField()
+            label(text: "Key Password: ")
+            inputKeyPassword = passwordField()
+            button(defaultButton: true, text: 'OK', actionPerformed: {
+              storePassword = inputStorePassword.password;
+              keyAlias = inputKeyAlias.password;
+              keyPassword = inputKeyPassword.password;
+              dispose();
+            })
+          }
+        }
+      }
+    }
+
+    if (storePassword.toString().empty) {
+      throw new InvalidUserDataException("EMPTY Store Password")
+    }
+    if (keyAlias.toString().empty) {
+      throw new InvalidUserDataException("EMPTY Key Alias")
+    }
+    if (keyPassword.toString().empty) {
+      throw new InvalidUserDataException("EMPTY Key Password")
+    }
+
+    android.signingConfigs.release.storePassword = storePassword.toString()
+    android.signingConfigs.release.keyAlias = keyAlias.toString()
+    android.signingConfigs.release.keyPassword = keyPassword.toString()
+  }
+}
 
 dependencies {
   compile project(':gandalf-library')
@@ -75,7 +123,6 @@ dependencies {
 
 final def log = project.logger
 final def variants = project.android.applicationVariants
-
 variants.all { variant ->
   if (!variant.buildType.isDebuggable()) {
     log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
