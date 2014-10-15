@@ -22,6 +22,16 @@ android {
   lintOptions {
     abortOnError false
   }
+
+  buildTypes {
+    debug {
+      runProguard false
+    }
+    release {
+      runProguard false
+      zipAlign true
+    }
+  }
 }
 
 dependencies {
