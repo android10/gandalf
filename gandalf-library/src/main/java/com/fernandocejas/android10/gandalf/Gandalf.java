@@ -33,8 +33,6 @@ import org.aspectj.lang.Aspects;
  */
 public final class Gandalf {
 
-  private static boolean inspectMode = true;
-
   private Gandalf() {}
 
   /**
@@ -44,7 +42,7 @@ public final class Gandalf {
    * be printed in the logcat only in debug mode.
    */
   public static void enableInspectionMode() {
-    inspectMode = true;
+    GandalfConfig.getInstance().setInspectMode(true);
   }
 
   /**
@@ -52,7 +50,7 @@ public final class Gandalf {
    * To enable this flag again call {@link #enableInspectionMode()}.
    */
   public static void disableInspectionMode() {
-    inspectMode = false;
+    GandalfConfig.getInstance().setInspectMode(false);
   }
 
   /**
@@ -63,10 +61,12 @@ public final class Gandalf {
    * This will be shown in the logcat only in DEBUG mode.
    */
   public static void printStats() {
-    if (inspectMode) {
-      printGandalfCollectedStats();
+    if (GandalfConfig.getInstance().isDebuggable()) {
+      if (GandalfConfig.getInstance().isInspectMode()) {
+        printGandalfCollectedStats();
+      }
+      printWatchingStats();
     }
-    printWatchingStats();
   }
 
   private static void printGandalfCollectedStats() {
