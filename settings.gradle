@@ -1,1 +1,2 @@
-include ':gandalf-example', ':gandalf-library'
+include ':gandalf-example'
+include ':gandalf-library'
