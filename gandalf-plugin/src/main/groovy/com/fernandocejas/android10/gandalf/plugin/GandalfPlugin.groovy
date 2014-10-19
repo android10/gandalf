@@ -8,7 +8,7 @@ import org.gradle.api.tasks.TaskInstantiationException
 
 class GandalfPlugin implements Plugin<Project> {
   @Override void apply(Project project) {
-    //verifyRequiredPlugins project
+    verifyRequiredPlugins project
     project.task('hello') << {
       println 'This is a hello world plugin'
     }
