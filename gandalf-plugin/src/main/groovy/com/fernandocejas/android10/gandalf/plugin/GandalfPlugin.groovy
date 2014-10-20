@@ -9,17 +9,17 @@ import org.gradle.api.tasks.TaskInstantiationException
 class GandalfPlugin implements Plugin<Project> {
   @Override void apply(Project project) {
     verifyRequiredPlugins project
-    project.task('hello') << {
-      println 'This is a hello world plugin'
+    project.task('FernandoCejas') << {
+      println 'This is a hello world plugin for Penano y otra prueba'
     }
   }
 
   private static void verifyRequiredPlugins(Project project) {
     def hasAppPlugin = project.plugins.hasPlugin(AppPlugin)
     def hasLibraryPlugin = project.plugins.hasPlugin(LibraryPlugin)
-    if (!hasAppPlugin || !hasLibraryPlugin) {
+    if (!hasAppPlugin && !hasLibraryPlugin) {
       throw new TaskInstantiationException(
-          "'android' or 'android-library' plugins are required")
+          "Plugins required: 'android' or 'android-library'.")
     }
   }
 }

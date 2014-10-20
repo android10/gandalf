@@ -16,3 +16,25 @@ allprojects {
 task wrapper(type: Wrapper) {
   gradleVersion = '2.1'
 }
+
+task assembleExample(type: Exec) {
+  workingDir = project.file('./')
+  commandLine 'gradlew', '-q', 'clean', 'assembleDebug', '-x', 'lint', 'install'
+  doFirst {
+    println '====== Assembling Gandalf ======'
+  }
+  doLast {
+    println '====== Gandalf Assembled! ======'
+  }
+}
+
+task installExample(type: Exec) {
+  workingDir = project.file('./')
+  commandLine 'gradlew', '-q', 'clean', 'assembleDebug', '-x', 'lint', 'install', 'installDebug'
+  doFirst {
+    println '====== Installing Gandalf ======'
+  }
+  doLast {
+    println '====== Gandalf Installed! ======'
+  }
+}

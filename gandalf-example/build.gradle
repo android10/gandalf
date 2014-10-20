@@ -5,14 +5,17 @@ import org.aspectj.tools.ajc.Main
 
 buildscript {
   repositories {
-    mavenCentral()
+    jcenter()
+    mavenLocal()
   }
   dependencies {
+    classpath 'com.fernandocejas:gandalf:0.1.0'
     classpath 'org.aspectj:aspectjtools:1.8.1'
   }
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.fernandocejas.gandalf'
 
 android {
   compileSdkVersion 19
