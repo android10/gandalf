@@ -38,3 +38,15 @@ task installExample(type: Exec) {
     println '====== Gandalf Installed! ======'
   }
 }
+
+task executeTests(type: Exec) {
+  workingDir = project.file('./')
+  commandLine 'gradlew', '-q', 'clean', 'assembleDebug', '-x', 'lint', 'install',
+      'assembleDebugTest'
+  doFirst {
+    println '====== Executing Gandalf Tests ======'
+  }
+  doLast {
+    println '====== Gandalf Tests Executed ======'
+  }
+}

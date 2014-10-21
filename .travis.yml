@@ -6,4 +6,4 @@ android:
     - android-19
 
 script:
-  ./gradlew clean assembleDebug assembleDebugTest -x lint
+  ./gradlew executeTests
