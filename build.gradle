@@ -39,14 +39,26 @@ task installExample(type: Exec) {
   }
 }
 
-task executeTests(type: Exec) {
-  workingDir = project.file('./')
-  commandLine 'gradlew', '-q', 'clean', 'assembleDebug', '-x', 'lint', 'install',
-      'assembleDebugTest'
+task executeGandalfTests(type: Exec) {
+  executable = '../gradlew'
+  workingDir = project.file('gandalf-library')
+  args = ['-q', 'clean', 'assembleDebug', 'assembleDebugTest', '-x', 'lint']
   doFirst {
     println '====== Executing Gandalf Tests ======'
   }
   doLast {
     println '====== Gandalf Tests Executed ======'
+  }
+}
+
+task executeGandalfPluginTests(type: Exec) {
+  executable = '../gradlew'
+  workingDir = project.file('gandalf-plugin')
+  args = ['-q', 'clean', 'build']
+  doFirst {
+    println '====== Building Gandalf Gradle Plugin and Executing Tests ======'
+  }
+  doLast {
+    println '====== Gandalf Gradle Plugin Built Successfully ======'
   }
 }
