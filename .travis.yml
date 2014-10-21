@@ -6,4 +6,5 @@ android:
     - android-19
 
 script:
-  ./gradlew executeGandalfTests executeGandalfPluginTests
+  ./gradlew -u -p gandalf-library/ clean assembleDebug assembleDebugTest -x lint
+  ./gradlew -u -p gandalf-plugin/ clean build
