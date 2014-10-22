@@ -9,8 +9,8 @@ buildscript {
     mavenLocal()
   }
   dependencies {
-    classpath 'com.fernandocejas:gandalf:0.1.0'
     classpath 'org.aspectj:aspectjtools:1.8.1'
+    classpath 'com.fernandocejas:gandalf:0.1.0'
   }
 }
 

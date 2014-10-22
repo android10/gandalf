@@ -51,7 +51,7 @@ task executeGandalfTest(type: Exec) {
 
 task executeGandalfPluginTest(type: Exec) {
   executable "../gradlew"
-  workingDir "./gandalf-plugin"
+  workingDir "gandalf-plugin"
   args = ["-q", "-u", "clean", "build"]
   doFirst {
     println '====== Building Gandalf Gradle Plugin and Executing Tests ======'
@@ -64,4 +64,6 @@ task executeGandalfPluginTest(type: Exec) {
 //Useful terminal commands:
 //gradlew -u -p gandalf-library/ clean assembleDebug assembleDebugTest -x lint
 //gradlew -u -p gandalf-plugin/ clean build
+
+//To install the gandalf-plugin in the local repository
 //gradlew -u -p gandalf-plugin/ clean build install
