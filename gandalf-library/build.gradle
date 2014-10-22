@@ -55,10 +55,9 @@ android.libraryVariants.all { variant ->
                      "-bootclasspath", plugin.project.android.bootClasspath.join(
         File.pathSeparator)]
 
-    MessageHandler handler = new MessageHandler(true);
+    final MessageHandler handler = new MessageHandler(true);
+    final def log = project.logger
     new Main().run(args, handler)
-
-    def log = project.logger
     for (IMessage message : handler.getMessages(null, true)) {
       switch (message.getKind()) {
         case IMessage.ABORT:
@@ -66,7 +65,6 @@ android.libraryVariants.all { variant ->
         case IMessage.FAIL:
           log.error message.message, message.thrown
           break;
-        case IMessage.WARNING:
         case IMessage.INFO:
           log.info message.message, message.thrown
           break;
@@ -76,4 +74,16 @@ android.libraryVariants.all { variant ->
       }
     }
   }
+}
+
+task installLibrary(type: Exec, dependsOn: assemble) {
+  executable = 'mvn'
+  args = [
+      "install:install-file",
+      "-DgroupId=${GROUP_ID}",
+      "-DartifactId=${ARTIFACT_ID}",
+      "-Dversion=${VERSION_NAME}",
+      "-Dpackaging=aar",
+      "-Dfile=build/outputs/aar/gandalf-library-${VERSION_NAME}.aar"
+  ]
 }
