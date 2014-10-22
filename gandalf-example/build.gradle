@@ -5,13 +5,18 @@ import org.aspectj.tools.ajc.Main
 
 buildscript {
   repositories {
-    jcenter()
-    mavenLocal()
+    mavenCentral()
+    mavenLocal() //Only for development purpose: you can safely remove this line on your app.
   }
   dependencies {
     classpath 'org.aspectj:aspectjtools:1.8.1'
     classpath 'com.fernandocejas:gandalf:0.1.0'
   }
+}
+
+repositories {
+  mavenCentral()
+  mavenLocal() //Only for development purpose: you can safely remove this line on your app.
 }
 
 apply plugin: 'com.android.application'
