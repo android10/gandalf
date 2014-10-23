@@ -2,36 +2,33 @@ package com.example.gandalf;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import com.fernandocejas.android10.gandalf.Gandalf;
 
 public class MainActivity extends Activity {
 
-  private final DataPresenter dataPresenterOne = new DataPresenter();
-  private final DataPresenter dataPresenterTwo = new DataPresenter();
+  private Button btn_LoadExamples;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    //dataPresenterOne.getData();
-    //dataPresenterOne.getData("pi");
-    //dataPresenterOne.getData("android10");
-    //dataPresenterOne.getData("fernando", 1);
-    //dataPresenterOne.getData("fernando", 1, 1);
-
-    dataPresenterOne.anotherMethodOne();
-    dataPresenterOne.anotherMethodOne();
-    dataPresenterOne.anotherMethodOne();
-    dataPresenterTwo.anotherMethodOne();
-
-    dataPresenterTwo.anotherMethodTwo();
-    dataPresenterTwo.anotherMethodTwo();
-
-    dataPresenterOne.printMessage("this is tag", "this is message");
-
-    dataPresenterOne.executeDiskIOTaskOnUiThread();
+    this.mapGUI();
   }
+
+  private void mapGUI() {
+    btn_LoadExamples = (Button) findViewById(R.id.btn_LoadExamples);
+    btn_LoadExamples.setOnClickListener(loadExamplesOnClickListener);
+  }
+
+  private final View.OnClickListener loadExamplesOnClickListener = new View.OnClickListener() {
+    @Override public void onClick(View v) {
+      //Intent intent = new Intent();
+      //startActivity(intent);
+    }
+  };
 
   @Override protected void onDestroy() {
     super.onDestroy();
