@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_name">Gandalf</string>
-<string name="url">http://www.android10.org/</string>
+  <string name="app_name">Gandalf</string>
+  <string name="url">http://www.android10.org/</string>
+  <string name="url_github">https://github.com/android10/gandalf</string>
 
-<string name="activity_title_examples">Gandalf Examples</string>
-<string name="btn_text_load_examples">Load Gandalf Samples</string>
+  <string name="activity_title_examples">Gandalf Examples</string>
 
-<string name="string_content_description">Non accessible view</string>
+  <string name="btn_text_load_examples">Load Gandalf Samples</string>
+  <string name="btn_text_sample_glog_annotation">GLog Annotation</string>
+  <string name="btn_text_sample_gtrace_annotation">GTrace Annotation</string>
+  <string name="btn_text_sample_gwatch_annotation">GWatch Annotation</string>
+  <string name="btn_text_sample_strictmode_annotation">StrictMode Annotation</string>
+  <string name="btn_text_sample_gandalfstats">Gandalf Stats</string>
+
+  <string name="string_tip_logcat">Do not forget to check the logcat to see the samples in action</string>
+  <string name="string_content_description">Non accessible view</string>
 </resources>
 
