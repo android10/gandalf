@@ -119,7 +119,3 @@ gradle.taskGraph.whenReady { taskGraph ->
     android.signingConfigs.release.keyPassword = keyPassword.toString()
   }
 }
-
-dependencies {
-  compile project(':gandalf-library') //Development purpose: safely remove this line on your app.
-}

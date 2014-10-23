@@ -1,14 +1,9 @@
 apply plugin: 'groovy'
 apply plugin: 'maven'
 
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-}
-
 repositories {
   mavenCentral()
+  mavenLocal()
 }
 
 dependencies {
@@ -17,6 +12,7 @@ dependencies {
   compile 'com.android.tools.build:gradle:0.13.2'
   compile 'org.aspectj:aspectjtools:1.8.1'
   compile 'org.aspectj:aspectjrt:1.8.1'
+  compile 'com.fernandocejas.gandalf:gandalf-library:0.1.0'
 
   testCompile 'junit:junit:4.11'
 }

@@ -23,18 +23,16 @@ android {
   compileSdkVersion 19
   buildToolsVersion '20.0.0'
 
-  lintOptions {
-    abortOnError false
+  defaultConfig {
+    applicationId "com.fernandocejas.android10.gandalf"
+    versionCode 1
+    versionName "${VERSION_NAME}"
+    minSdkVersion 15
+    targetSdkVersion 19
   }
 
-  buildTypes {
-    debug {
-      runProguard false
-    }
-    release {
-      runProguard false
-      zipAlign true
-    }
+  lintOptions {
+    abortOnError false
   }
 }
 
@@ -74,16 +72,22 @@ android.libraryVariants.all { variant ->
       }
     }
   }
+
+  variant.outputs.each { output ->
+    if (output.outputFile != null && output.outputFile.name.endsWith('.aar')) {
+      def file = output.outputFile
+      def fileName = file.name.replace("${variant.buildType.name}.aar", "${VERSION_NAME}.aar")
+      output.outputFile = new File(file.parent, fileName)
+    }
+  }
 }
 
 task installLibrary(type: Exec, dependsOn: assemble) {
   executable = 'mvn'
-  args = [
-      "install:install-file",
-      "-DgroupId=${GROUP_ID}",
-      "-DartifactId=${ARTIFACT_ID}",
-      "-Dversion=${VERSION_NAME}",
-      "-Dpackaging=aar",
-      "-Dfile=build/outputs/aar/gandalf-library-${VERSION_NAME}.aar"
-  ]
+  args = ["install:install-file",
+          "-DgroupId=${GROUP_ID}",
+          "-DartifactId=${ARTIFACT_ID}",
+          "-Dversion=${VERSION_NAME}",
+          "-Dpackaging=aar",
+          "-Dfile=build/outputs/aar/gandalf-library-${VERSION_NAME}.aar"]
 }

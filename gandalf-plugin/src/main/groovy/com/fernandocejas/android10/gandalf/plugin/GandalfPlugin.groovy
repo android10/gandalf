@@ -16,6 +16,7 @@ class GandalfPlugin implements Plugin<Project> {
 
     project.dependencies {
       compile 'org.aspectj:aspectjrt:1.8.1'
+      compile 'com.fernandocejas.gandalf:gandalf-library:0.1.0'
     }
 
     def variants = getProjectVariants project
