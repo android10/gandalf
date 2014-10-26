@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.example.gandalf.sample.GLogSample;
+import com.example.gandalf.sample.GTraceSample;
 import com.fernandocejas.android10.gandalf.Gandalf;
 
 public class SamplesActivity extends Activity {
@@ -47,7 +48,9 @@ public class SamplesActivity extends Activity {
 
   private View.OnClickListener buttonSampleGTraceListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
-
+      GTraceSample gTraceSample = new GTraceSample();
+      gTraceSample.doSomethingOnMainThread();
+      gTraceSample.doSomethingOnAnotherThread("SomeValue");
     }
   };
 
