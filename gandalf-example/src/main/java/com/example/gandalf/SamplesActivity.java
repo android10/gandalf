@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import com.example.gandalf.sample.GLogSample;
+import com.example.gandalf.sample.GStrictModeSample;
 import com.example.gandalf.sample.GTraceSample;
 import com.example.gandalf.sample.GWatchSample;
 import com.fernandocejas.android10.gandalf.Gandalf;
+import com.fernandocejas.android10.gandalf.annotation.GStrictMode;
 
 public class SamplesActivity extends Activity {
 
@@ -17,6 +19,7 @@ public class SamplesActivity extends Activity {
   private Button btn_sampleStrictModeAnnotation;
   private Button btn_sampleGandalfStats;
 
+  @GStrictMode
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -69,7 +72,12 @@ public class SamplesActivity extends Activity {
 
   private View.OnClickListener buttonSampleStrictModeListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
-
+      //REMEMBER: It is not necessary to annotate each method/constructor, it is enough with
+      //just using the annotation on the main entry point of your app to activate StricMode.
+      //Thus this feature will live along the execution of your app.
+      //In this example we are annotating the onCreate() method of this activity.
+      GStrictModeSample gStrictModeSample = new GStrictModeSample();
+      gStrictModeSample.executeDiskIOTaskOnUiThread();
     }
   };
 
