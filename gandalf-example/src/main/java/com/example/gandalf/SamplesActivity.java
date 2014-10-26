@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.example.gandalf.sample.GLogSample;
 import com.fernandocejas.android10.gandalf.Gandalf;
 
 public class SamplesActivity extends Activity {
@@ -35,14 +36,12 @@ public class SamplesActivity extends Activity {
     this.btn_sampleGandalfStats.setOnClickListener(buttonSampleGandalfStatsListener);
   }
 
-  @Override protected void onDestroy() {
-    super.onDestroy();
-    Gandalf.printStats();
-  }
-
   private View.OnClickListener buttonSampleGLogListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
-
+      GLogSample gLogSample = new GLogSample();
+      gLogSample.doSomething();
+      gLogSample.doSomethingElse(1, "android");
+      gLogSample.doSomethingAndLogOnlyTime();
     }
   };
 
@@ -66,7 +65,7 @@ public class SamplesActivity extends Activity {
 
   private View.OnClickListener buttonSampleGandalfStatsListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
-
+      Gandalf.printStats();
     }
   };
 }
