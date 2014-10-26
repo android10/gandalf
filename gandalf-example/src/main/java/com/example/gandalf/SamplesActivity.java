@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import com.example.gandalf.sample.GLogSample;
 import com.example.gandalf.sample.GTraceSample;
+import com.example.gandalf.sample.GWatchSample;
 import com.fernandocejas.android10.gandalf.Gandalf;
 
 public class SamplesActivity extends Activity {
@@ -56,7 +57,13 @@ public class SamplesActivity extends Activity {
 
   private View.OnClickListener buttonSampleGWatchListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
-
+      GWatchSample gWatchSample = new GWatchSample();
+      gWatchSample.doSomething();
+      gWatchSample.doSomething();
+      gWatchSample.doSomething();
+      gWatchSample.DoSomethingManyTimes(12);
+      Gandalf.disableInspectionMode();
+      Gandalf.printStats();
     }
   };
 
@@ -68,6 +75,7 @@ public class SamplesActivity extends Activity {
 
   private View.OnClickListener buttonSampleGandalfStatsListener = new View.OnClickListener() {
     @Override public void onClick(View v) {
+      Gandalf.enableInspectionMode();
       Gandalf.printStats();
     }
   };
