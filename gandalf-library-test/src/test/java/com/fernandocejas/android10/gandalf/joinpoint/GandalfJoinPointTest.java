@@ -5,20 +5,18 @@
 package com.fernandocejas.android10.gandalf.joinpoint;
 
 import com.fernandocejas.android10.gandalf.ApplicationTestCase;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import org.junit.rules.ExpectedException;
 
 public class GandalfJoinPointTest extends ApplicationTestCase {
 
-  @Before
-  public void setUp() {
-  }
+  @Rule
+  public ExpectedException expectedException = ExpectedException.none();
 
   @Test
-  public void testDummy() {
-    assertThat(true, is(true));
+  public void testGandalfJoinPointCreation() {
+    expectedException.expect(IllegalArgumentException.class);
+    GandalfJoinPoint gandalfJoinPoint = new GandalfJoinPoint(null);
   }
 }
