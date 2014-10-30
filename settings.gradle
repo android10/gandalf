@@ -1,3 +1,4 @@
 include ':gandalf-example'
 include ':gandalf-library'
 include ':gandalf-plugin'
+include ':gandalf-library-test'
