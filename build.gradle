@@ -53,7 +53,7 @@ task executeGandalfTest(type: Exec) {
 //gradlew -u -p gandalf-plugin/ clean build
 
 //To install the gandalf-library in the local repository
-//gradlew -u -p gandalf-library/ clean assembleDebug installLibrary -x lint
+//gradlew -u -p gandalf-library/ clean build installLibrary -x lint
 
 //To install the gandalf-plugin in the local repository
 //gradlew -u -p gandalf-plugin/ clean build install
