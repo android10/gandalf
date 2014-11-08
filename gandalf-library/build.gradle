@@ -42,6 +42,8 @@ dependencies {
 
 android.libraryVariants.all { variant ->
   LibraryPlugin plugin = project.plugins.getPlugin(LibraryPlugin)
+
+  //Compile aspects
   JavaCompile javaCompile = variant.javaCompile
   javaCompile.doLast {
     String[] args = ["-showWeaveInfo",
@@ -73,6 +75,7 @@ android.libraryVariants.all { variant ->
     }
   }
 
+  //Change aar file name: add version name
   variant.outputs.each { output ->
     if (output.outputFile != null && output.outputFile.name.endsWith('.aar')) {
       def file = output.outputFile
@@ -83,6 +86,7 @@ android.libraryVariants.all { variant ->
 }
 
 task installLibrary(type: Exec, dependsOn: assemble) {
+  description = "Installs Gandalf generated artifact in the local maven repository."
   executable = 'mvn'
   args = ["install:install-file",
           "-DgroupId=${GROUP_ID}",

@@ -18,6 +18,7 @@ task wrapper(type: Wrapper) {
 }
 
 task assembleExample(type: Exec) {
+  description = "Assembles Gandalf example."
   workingDir = project.file('.')
   commandLine = ['gradlew', '-q', 'clean', 'assembleDebug', '-x', 'lint', 'install']
   doFirst {
@@ -29,6 +30,7 @@ task assembleExample(type: Exec) {
 }
 
 task installExample(type: Exec) {
+  description = "Assembles and installs Gandalf example debug version."
   commandLine "gradlew", "-q", "clean", "assembleDebug", "-x", "lint", "install", "installDebug"
   doFirst {
     println '====== Installing Gandalf ======'
@@ -39,6 +41,7 @@ task installExample(type: Exec) {
 }
 
 task executeGandalfTest(type: Exec) {
+  description = "Executes Gandalf unit tests."
   commandLine "gradlew", "-u", "-q", "clean", "test"
   doFirst {
     println '====== Executing Gandalf Unit Tests ======'
