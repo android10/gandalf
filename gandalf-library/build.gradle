@@ -84,6 +84,7 @@ android.libraryVariants.all { variant ->
     }
   }
 
+  //Generate java doc
   task("generateGandalf${variant.name.capitalize()}Javadoc", type: Javadoc) {
     title = "$name $version API"
     description = "Generates Gandalf Javadoc for ${variant.name}."
