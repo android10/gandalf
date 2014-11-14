@@ -21,8 +21,7 @@ import static java.lang.annotation.RetentionPolicy.CLASS;
  * <br><br>TO REMEMBER:<br>
  * <br>To see the stats, at any point, you just call
  * {@link com.fernandocejas.android10.gandalf.Gandalf#printStats()}, thus, the information will be
- * printed and the results will be shown in the logcat only in debug mode using
- * {@link com.fernandocejas.android10.gandalf.internal.DebugLog}.<br>
+ * printed and the results will be shown in the logcat only in debug mode.
  *
  * <br>OUTPUT EXAMPLE:<br>
  * <br>Gandalf => [@Method -> yourMethodOne() :: Executed 4 times :: Total time 100 ms]

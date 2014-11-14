@@ -27,8 +27,8 @@ import org.aspectj.lang.Aspects;
  * mode.<br>
  *
  * <br>------------------------------------------------------------------------------------------
- * <br>"Keep well the Lord of the Mark, till I return. Await me at Helm's Gate. Farewell!"
- * –Gandalf to Aragorn and Éomer and the men of the king's household.
+ * <br>"Keep well the Lord of the Mark, till I return. Await me at Helm&#39;s Gate.
+ * Farewell!" Gandalf to Aragorn and Eomer and the men of the king&#39;s household.
  * <br>------------------------------------------------------------------------------------------
  */
 public final class Gandalf {

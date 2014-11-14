@@ -84,16 +84,16 @@ android.libraryVariants.all { variant ->
     }
   }
 
-  //Generate java doc
+  //Generate java doc tasks
   task("generateGandalf${variant.name.capitalize()}Javadoc", type: Javadoc) {
     title = "$name $version API"
     description = "Generates Gandalf Javadoc for ${variant.name}."
     source = variant.javaCompile.source
-    ext.androidJar =
-        "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
-    classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
-    options.links("http://docs.oracle.com/javase/7/docs/api/");
-    options.links("http://d.android.com/reference/");
+    def androidJar = "${android.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+    ext.androidJar = androidJar
+    classpath = files(ext.androidJar, variant.javaCompile.classpath.files)
+    options.links "http://docs.oracle.com/javase/7/docs/api/"
+    options.linksOffline "http://d.android.com/reference", "${android.sdkDirectory}/docs/reference"
     exclude '**/BuildConfig.java'
     exclude '**/R.java'
   }
