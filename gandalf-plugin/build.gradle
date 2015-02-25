@@ -9,7 +9,7 @@ repositories {
 dependencies {
   compile gradleApi()
   compile localGroovy()
-  compile 'com.android.tools.build:gradle:0.13.2'
+  compile 'com.android.tools.build:gradle:1.0.0'
   compile 'org.aspectj:aspectjtools:1.8.1'
   compile 'org.aspectj:aspectjrt:1.8.1'
   compile 'com.fernandocejas.gandalf:gandalf-library:0.1.0'

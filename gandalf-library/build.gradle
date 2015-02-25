@@ -8,7 +8,7 @@ buildscript {
     mavenCentral()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:0.13.2'
+    classpath 'com.android.tools.build:gradle:1.0.0'
     classpath 'org.aspectj:aspectjtools:1.8.1'
   }
 }
@@ -24,7 +24,6 @@ android {
   buildToolsVersion '20.0.0'
 
   defaultConfig {
-    applicationId "com.fernandocejas.android10.gandalf"
     versionCode 1
     versionName "${VERSION_NAME}"
     minSdkVersion 15
