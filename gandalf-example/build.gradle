@@ -54,15 +54,11 @@ android {
 
   buildTypes {
     debug {
-      runProguard false
       applicationIdSuffix ".debug"
       versionNameSuffix "-debug"
     }
     release {
       signingConfig signingConfigs.release
-      runProguard false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-      zipAlign true
     }
   }
 }
