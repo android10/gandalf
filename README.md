@@ -1,7 +1,9 @@
 Gandalf [![Build Status](https://travis-ci.org/android10/gandalf.svg)](https://travis-ci.org/android10/gandalf)
 =========================
 
-work in progress
+This attempt of Android Library is deprecated and now his little brother called Frodo come into play: https://github.com/android10/frodo
+
+![frodo_hug](https://cloud.githubusercontent.com/assets/1360604/10925718/e7ea4318-8290-11e5-91b4-f2bfbde65319.gif)
 
 
 Local Development
@@ -16,7 +18,7 @@ Here are some useful Gradle/adb commands for executing this example:
 License
 --------
 
-    Copyright 2014 Fernando Cejas
+    Copyright 2015 Fernando Cejas
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
