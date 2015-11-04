@@ -1,7 +1,7 @@
 Gandalf [![Build Status](https://travis-ci.org/android10/gandalf.svg)](https://travis-ci.org/android10/gandalf)
 =========================
 
-This attempt of Android Library is deprecated and now his little brother called Frodo come into play: https://github.com/android10/frodo
+This attempt of Android Library is deprecated and now his little brother called Frodo comes into play: https://github.com/android10/frodo
 
 ![frodo_hug](https://cloud.githubusercontent.com/assets/1360604/10925718/e7ea4318-8290-11e5-91b4-f2bfbde65319.gif)
 
